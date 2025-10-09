@@ -17,36 +17,7 @@ class Store
 
 class StoreDAO
 {
-    public function ishashtag(string $hashtag_name)
-    {
-        $dbh = DAO::get_db_connect();
-
-        $sql = "SELECT * FROM hashtag
-                WHERE hashtag_name = :hashtag_name";
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
-        $stmt->execute();
-
-        return $stmt->fetch();
-    }
-
-    public function hashtag_name_insert(string $hashtag_name)
-    {
-        $dbh = DAO::get_db_connect();
-
-         //ハッシュタグテーブルに追加されるがないとき
-            if (!$this->cart_exists($memberid, $goodscode))
-
-        $sql = "INSERT INTO hashtag
-                VALUES(':hashtag_name')";
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
-        $stmt->execute();
-    }
-
-    public function hashtag_id_search(string $hashtag_name){
+       public function hashtag_id_search(string $hashtag_name){
         $dbh = DAO::get_db_connect();
 
         $sql = "SELECT hashtag_id FROM hashtag
@@ -58,6 +29,24 @@ class StoreDAO
         
         return $stmt->fetchObject('hashtag');
     }
+
+    public function hashtag_name_insert(string $hashtag_name)
+    {
+        $dbh = DAO::get_db_connect();
+
+         //ハッシュタグテーブルに追加されるハッシュタグ名がないとき
+            if (!$this->hashtag_id_search($hashtag_name))
+        {
+        $sql = "INSERT INTO hashtag
+                VALUES(':hashtag_name')";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
+        $stmt->execute();
+         }
+    }
+
+ 
 
     public function store_insert(
         string $store_name,
