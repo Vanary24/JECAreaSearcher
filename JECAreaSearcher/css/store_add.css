@@ -6,9 +6,16 @@ body {
     text-align: center;
 }
 
+.tel input {
+    text-align: center;
+}
+
 .tag-add {
     border: none;
     background-color: transparent;
-    left: 30%;
-    align-items: center;
+    color: rgb(132, 182, 247);
+}
+
+.tag-add:hover {
+    color: rgb(0, 110, 255);
 }

@@ -20,7 +20,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     ?>
 
         <div class="container mt-3">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="border border-info-subtle rounded-3 w-auto">
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="m-2 w-75">
@@ -39,7 +39,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                     <input type="text" name="store_address" id="address" class="form-control" placeholder="東京都〇〇区〇－〇－〇・・・" required>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-md-6">
                                     <label for="tel" class="form-label">電話番号</label>
                                     <div class="d-flex align-items-center tel">
                                         <input type="tel" name="store_tel1" id="tel" class="form-control" maxlength="2" pattern="[0-9]{2}" title="数字2桁" placeholder="XX" required>－
@@ -57,24 +57,18 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                     <label for="open" class="form-label">営業時間</label>
                                     <input type="text" name="store_open" id="open" class="form-control" placeholder="営業時間" required>
                                 </div>
-                                <div class="col-4 tag position-relative">
-                                    <label for="tag" class="form-label">ハッシュタグ</label>
-                                    <input type="text" name="store_tag" id="tag" class="form-control" required>
-                                    <button type="button" class="tag-add position-absolute top-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                        </svg>
-                                    </button>
+                                <div class="tag position-relative" id="tagarea">
+                                    <label for="tag" class="form-label">ハッシュタグ（最大３つまで）</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="text" name="store_tag1" id="tag" class="form-control me-2" required>
+                                        <input type="text" name="store_tag2" class="form-control me-2">
+                                        <input type="text" name="store_tag3" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-floating mb-1">
-
-
-                            </div>
-                            <div class="form-floating">
-                                <input type="text" name="store_name" id="image" class="form-control" placeholder="画像">
-                                <label for="image">画像</label>
+                                <div>
+                                    <label for="img" class="form-label">画像</label>
+                                    <input type="file" id="img" name="image[]" multiple class="form-control">
+                                </div>
                             </div>
                         </div>
 
