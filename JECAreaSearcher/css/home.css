@@ -1,0 +1,17 @@
+body {
+    padding-top: 100px;
+}
+
+.buliding-select {
+    text-align: center;
+    letter-spacing: .25rem;
+}
+
+.star {
+    border: none;
+    background-color: #fff;
+}
+
+.star svg {
+    color: rgb(245, 245, 50);
+}

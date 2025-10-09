@@ -1,0 +1,47 @@
+.search-form {
+    align-items: center;
+    background: #fff;
+    border-radius: .375rem;
+    display: flex;
+}
+
+.search-input {
+    outline: none;
+    border: 0;
+    padding-left: 8px;
+    width: 200px;
+}
+
+.btn-config {
+    color: black;
+    background-color: #ced4da;
+    border: 0;
+}
+
+.btn-config:hover {
+    color: #fff;
+}
+
+.btn-config::after {
+    border: 0;
+}
+
+.btn-config:focus {
+    outline: none;
+}
+
+.navi {
+    display: flex;
+}
+
+@media (min-width: 1000px) {
+    .toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .navi {
+        display: none;
+    }
+}

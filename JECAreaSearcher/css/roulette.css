@@ -1,0 +1,109 @@
+body {
+    padding-top: 100px;
+}
+
+button{
+    padding: 5px;
+    font-family: inherit;
+    appearance: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+
+}
+/*　ボタンのスタイル */
+.botton{
+    position: relative;
+    padding: 0 24px;
+    overflow: hidden;
+    color: #222;
+    text-align: center;
+    overflow-wrap: anywhere;
+    background: transparent;
+}
+
+.botton::after{
+    position: absolute;
+    justify-content: space-between;
+    
+}
+
+.favorite::after{
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    content: "";
+    background-color: #82a06c;
+    transform: scaleX(0);
+    transform-origin: right top;
+}
+
+.recommend::after{
+     bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    content: "";
+    background-color: #82a06c;
+    transform: scaleX(0);
+    transform-origin: right top;
+}
+
+.result::after{
+     bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    content: "";
+    background-color: #82a06c;
+    transform: scaleX(0);
+    transform-origin: right top;
+}
+
+
+
+button:hover {
+    background-color: #ecfce1;
+    border-radius: 2rem;
+}
+
+@media (any-hover: hover){
+    .favorite::after{
+        transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .favorite:hover::after{
+        transition: transform 0.4s cubic-bezier(0.9, 0, 0, 1);
+        transform: scaleX(1);
+        transform-origin: left top;
+        
+    }
+
+    .recommend::after{
+        transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .recommend:hover::after{
+        transition: transform 0.4s cubic-bezier(0.9, 0, 0, 1);
+        transform: scaleX(1);
+        transform-origin: left top;
+        
+    }
+
+    .result::after{
+        transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .result:hover::after{
+        transition: transform 0.4s cubic-bezier(0.9, 0, 0, 1);
+        transform: scaleX(1);
+        transform-origin: left top;
+        
+    }
+    
+
+}

@@ -1,0 +1,14 @@
+body {
+    padding-top: 100px;
+}
+
+.tel input::placeholder {
+    text-align: center;
+}
+
+.tag-add {
+    border: none;
+    background-color: transparent;
+    left: 30%;
+    align-items: center;
+}
