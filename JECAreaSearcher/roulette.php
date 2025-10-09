@@ -43,7 +43,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                 
             </div>
 
-            <button id="spin">スピンする</button>
+            
 
             <p id="result"></p>
 
