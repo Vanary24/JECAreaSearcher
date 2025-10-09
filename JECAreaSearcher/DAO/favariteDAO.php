@@ -19,6 +19,13 @@
              $stmt->execute();
 
         }
+
+        public function get_store_name(int $store_id)
+        {
+                $dbh = DAO::get_db_connect();
+
+                //store-idをもとにstore_nameを取得する
+        }
         
        
 
