@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('.tel input');
+    const tel_length = document.getElementById('tel').maxLength;
 
     inputs.forEach((input, index) => {
         input.addEventListener('input', (e) => {
-            if (e.target.value.length === 2 && index < inputs.length - 1) {
+            if (e.target.value.length === tel_length && index < inputs.length - 1) {
                 inputs[index + 1].focus();
             } else if (e.target.value.length === 4 && index < inputs.length - 1) {
                 inputs[index + 1].focus();
