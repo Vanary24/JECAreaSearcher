@@ -40,7 +40,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             <div id="roulette">
                 <div id="pointer"></div>
                 <canvas id="canvas"></canvas>
-                <button type="button" name = "spin">ルーレットを回す</button>
+                <button type="button" id= "spin">ルーレットを回す</button>
             </div>
 
             
