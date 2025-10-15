@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
         $email = $id . '@jec.ac.jp';
+        $_SESSION['id'] = $id;
     } else {
         $err = '学籍番号を入力してください';
     }
