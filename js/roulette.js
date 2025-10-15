@@ -24,7 +24,7 @@ function drawRoulette() {
         ctx.beginPath();
         ctx.moveTo(0,0);
         ctx.arc(0,0,canvasSize / 2, index * sectorAngle, (index + 1) * sectorAngle);
-        ctx.fillStyle = colors[index];
+        ctx.fillStyle = color[index];
         ctx.fill();
         ctx.closepath();
 
