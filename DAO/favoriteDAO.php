@@ -25,6 +25,7 @@
                 $dbh = DAO::get_db_connect();
 
                 //store-idをもとにstore_nameを取得する
+                
         }
         
        
