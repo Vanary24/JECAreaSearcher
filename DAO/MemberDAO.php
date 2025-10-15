@@ -53,10 +53,12 @@
             if ($member !== false) {
                 if (password_verify($member_password, $member->member_password)) {
                     return $member;
+                } else {
+                    return false;
                 }
             }
 //ここはlogin.phpの32行目に返ってくる
-            return false;
+            
         }
 
         public function update_password(string $member_password, string $member_id){
