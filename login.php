@@ -1,6 +1,6 @@
 <?php
     $errs = [];
-
+    
     require_once './DAO/MemberDAO.php';
     session_start();
 

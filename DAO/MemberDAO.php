@@ -4,7 +4,7 @@
     class Member {
         public string $member_id;         // 学籍番号
         public string $member_password;         // パスワード
-        public string $nickname;         // ニックネーム
+        public string $member_nickname;         // ニックネーム
         
     }
 
@@ -35,7 +35,7 @@
             $password = password_hash($member_password, PASSWORD_DEFAULT);
 
             $stmt->bindValue(':member_password', $password, PDO::PARAM_STR);
-            $stmt->bindValue(':nickname', $nickname, PDO::PARAM_STR);
+            $stmt->bindValue(':niFckname', $nickname, PDO::PARAM_STR);
             $stmt->bindValue(':member_id',$member_id,PDO::PARAM_STR);
             $stmt->execute();
         }
@@ -48,15 +48,17 @@
             $stmt = $dbh->prepare($sql);
             $stmt->bindValue(':member_id', $member_id, PDO::PARAM_STR);
             $stmt->execute();
-            $member = $stmt->fetchObject('Member');
+            $member = $stmt->fetchObject('member');
 
             if ($member !== false) {
                 if (password_verify($member_password, $member->member_password)) {
                     return $member;
+                } else {
+                    return false;
                 }
             }
 //ここはlogin.phpの32行目に返ってくる
-            return false;
+            
         }
 
         public function update_password(string $member_password, string $member_id){
