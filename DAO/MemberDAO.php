@@ -40,7 +40,7 @@
             $stmt->execute();
         }
 
-         public function get_member(string $member_id, string $member_password) {
+        public function get_member(string $member_id, string $member_password) {
             $dbh = DAO::get_db_connect();
 
             $sql = "select * from Member where member_id = :member_id";
@@ -67,7 +67,7 @@
                     where member_id = :member_id";
             $stmt = $dbh->prepare($sql);
 
-             $password = password_hash($member_password, PASSWORD_DEFAULT);
+            $password = password_hash($member_password, PASSWORD_DEFAULT);
 
             $stmt->bindValue(':member_password', $password, PDO::PARAM_STR);
             $stmt->bindValue('member_id',$member_id,PDO::PARAM_STR);
