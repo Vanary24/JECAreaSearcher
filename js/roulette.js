@@ -1,5 +1,8 @@
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+});
+
 const pointer = document.getElementById('pointer');
 const sectors = ["1","2","3"];
 const color = ["#F00","#00F","#FF0"];
