@@ -3,6 +3,7 @@
 require_once 'DAO.php';
 
 class goukann{
+    
 
 
 }
