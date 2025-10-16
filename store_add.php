@@ -91,8 +91,8 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <script>
-        $(function(){
-            $('#filesend').change(function(){
+        $(function() {
+            $('#filesend').change(function() {
                 if (!this.files.length) {
                     return
                 }
@@ -105,6 +105,10 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     var fr = new FileReader();
 
                     fr.onload = function(e) {
+                        var previewhtml = 
+                            `
+                                <div class="me-2 mb-2 position-relative"
+                            `;
                         var src = e.target.result;
                         var img = '<img src ="' + src + '" width="250" height="250" class="me-2 mb-2">';
                         $('#preview').append(img);
@@ -115,6 +119,19 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
                 $('#preview').css('display', 'block');
             });
+
+            $('#preview img').hover(
+                function() {
+                    $('#preview img').css({
+                        opacity: "0.5",
+                        cursor: pointer
+                    });
+                }
+            )
+
+            $('#preview img').on('click', function(){
+
+            })
         });
     </script>
 </body>
