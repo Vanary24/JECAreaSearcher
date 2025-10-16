@@ -3,13 +3,8 @@
 require_once 'DAO.php';
 
 class goukann{
-<<<<<<< HEAD
-    
-
-=======
 public int $goukann; 
 public int $store_id;
->>>>>>> 72553c6dce6c401cca779765bfe908a68063d04c
 
 }
 
