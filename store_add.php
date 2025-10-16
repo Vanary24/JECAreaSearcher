@@ -8,8 +8,8 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 <head>
     <meta charset="UTF-8">
     <title>店舗追加</title>
-    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/">
-    <script src="./bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
+    <script src="./helper/bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./css/store_add.css">
     <script src="./js/store_add.js"></script>
 </head>

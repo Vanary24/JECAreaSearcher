@@ -38,9 +38,9 @@ if (isset($_POST['fav_star'])) {
 <head>
     <meta charset="UTF-8">
     <title>ホーム</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/home.css">
-    <script src="./bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./helper/bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>

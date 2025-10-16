@@ -81,10 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>パスワード再設定</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/sign-in.css">
     <link rel="stylesheet" href="./css/modal.css">
-    <script src="./js/email_send.js"></script>
 </head>
 
 <body class="d-flex align-items-center py-4">
