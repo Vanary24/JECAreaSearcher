@@ -36,6 +36,8 @@
 
                 $stmt->execute();
 
+                 return $stmt->fetchObject("store");
+
         }
         
        
