@@ -3,8 +3,8 @@
     
     session_start();
 
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if (isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,7 +26,7 @@
         if (empty($err)) {
             $msg = 'パスワード再設定しました';
             $memberDAO = new MemberDAO();
-            $memberDAO->update_password($pw, '24jn0433');
+            $memberDAO->update_password($pw, $id);
         }
     }
 ?>
@@ -47,10 +47,7 @@
                 <h2>パスワード再設定</h2>
             </div>
             <div class="form-floating mb-1">
-                <input type="password" name="password" id="pw" class="form-control" placeholder="新しいパスワード" 
-                <?php if (!empty($id)) { ?>
-                    value="<?= $id ?>"
-                <?php } ?> required>
+                <input type="password" name="password" id="pw" class="form-control" placeholder="新しいパスワード" required>
                 <label for="pw">新しいパスワード</label>
             </div>
             <div class="form-floating">
