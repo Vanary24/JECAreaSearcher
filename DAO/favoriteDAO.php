@@ -1,6 +1,6 @@
 <?php 
 
-    require_once './DAO.php';
+    require_once './DAO/DAO.php';
 
     class favoriteDAO
     {
