@@ -1,6 +1,6 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
+require_once './DAO/rouletteDAO.php';
 
 ?>
 
