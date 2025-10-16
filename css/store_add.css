@@ -19,3 +19,28 @@ body {
 .tag-add:hover {
     color: rgb(0, 110, 255);
 }
+
+.filelabel {
+   /* background-color: orange; */
+   color: white;
+   /* border: 2px solid orange; */
+   border-radius: 3em;
+   padding: 12px 9px;
+   display: inline-block;
+}
+.filelabel img {
+   vertical-align: bottom;
+}
+.filelabel:hover {
+   opacity: 0.5;
+   border: 2px solid red;
+   cursor: pointer;
+}
+
+#filesend {
+    display: none;
+}
+
+#preview {
+    display: none;
+}

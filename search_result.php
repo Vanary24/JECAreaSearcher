@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <title>検索結果</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
 </head>
 <body>
     <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
