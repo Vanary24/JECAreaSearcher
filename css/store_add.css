@@ -42,3 +42,12 @@ body {
 #preview {
     display: none;
 }
+
+#preview div {
+    display: inline;
+}
+
+#preview img:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
