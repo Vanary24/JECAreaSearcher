@@ -18,6 +18,8 @@
 
              $stmt->execute();
 
+             return $stmt->fetchObject("member_favorite");
+
         }
 
         public function get_store_name(int $store_id)
