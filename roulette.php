@@ -1,6 +1,6 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
+require_once './DAO/rouletteDAO.php';
 
 ?>
 
@@ -10,9 +10,9 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 <head>
     <meta charset="UTF-8">
     <title>ルーレット</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/roulette.css">
-    <script src="./bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./helper/bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
     <script src="./js/roulette.js"></script>
 </head>
 
