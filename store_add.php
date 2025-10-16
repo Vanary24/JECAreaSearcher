@@ -12,6 +12,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     <script src="./helper/bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./css/store_add.css">
     <script src="./js/store_add.js"></script>
+    <script src="./helper/jQuery/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -77,6 +78,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                         <input type="file" id="filesend" name="image[]" multiple accept=".jpg,.png,image/jped,image/png">
                                     </label>
                                 </div>
+                                <div id="preview" class="col text-center"></div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +91,31 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <script>
-        const 
+        $(function(){
+            $('#filesend').change(function(){
+                if (!this.files.length) {
+                    return
+                }
+                $('#preview').text('');
+
+                var $files = $(this).prop('files');
+                var len = $files.length;
+                for (var i = 0; i < len; i++) {
+                    var file = $files[i];
+                    var fr = new FileReader();
+
+                    fr.onload = function(e) {
+                        var src = e.target.result;
+                        var img = '<img src ="' + src + '" width="250" height="250" class="me-2 mb-2">';
+                        $('#preview').append(img);
+                    }
+
+                    fr.readAsDataURL(file);
+                }
+
+                $('#preview').css('display', 'block');
+            });
+        });
     </script>
 </body>
 

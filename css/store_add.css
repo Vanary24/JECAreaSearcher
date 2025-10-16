@@ -40,3 +40,7 @@ body {
 #filesend {
     display: none;
 }
+
+#preview {
+    display: none;
+}
