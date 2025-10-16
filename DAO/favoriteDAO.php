@@ -18,6 +18,8 @@
 
              $stmt->execute();
 
+             return $stmt->fetchObject("member_favorite");
+
         }
 
         public function get_store_name(int $store_id)
@@ -33,6 +35,8 @@
                 $stmt->bindvalue(':store_id', $store_id, PDO::PARAM_STR);
 
                 $stmt->execute();
+
+                 return $stmt->fetchObject("store");
 
         }
         
