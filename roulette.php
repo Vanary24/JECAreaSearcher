@@ -26,13 +26,13 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                 <div class="d-flex justify-content-around align-items-center botton">
 
                     <div class="favorite mb-2">
-                        <button type="button" name="favorite">お気に入り</button>
+                        <button onclick="drawRoulette()" name="favorite">お気に入り</button>
                     </div>
                     <div class="recommend mb-2">
-                        <button type="button" name="recommend">おすすめ</button>
+                        <button onclick="drawRoulette()" name="recommend">おすすめ</button>
                     </div>
                     <div class="result mb-2">
-                        <button type="button" name="result">検索結果</button>
+                        <button onclick="drawRoulette()" name="result">検索結果</button>
                     </div>
 
                 </div>
@@ -40,13 +40,12 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             <div id="roulette">
                 <div id="pointer"></div>
                 <canvas id="canvas"></canvas>
-                <button type="button" id= "spin">ルーレットを回します
-            </button>
+                <button onclick="spinRoulette()" id= "spin">ルーレットを回します</button>
             </div>
 
             
 
-            <p id="result"></p>
+            
 
         </div>
 

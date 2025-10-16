@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-});
+
 
 const pointer = document.getElementById('pointer');
 const sectors = ["1","2","3"];
@@ -9,7 +9,7 @@ const color = ["#F00","#00F","#FF0"];
 let angle = 0;
 let canvasSize = Math.min(window.innerWidth,window.innerHeight) * 0.8;  // キャンバスのサイズを端末に合わせる
 canvas.width = canvasSize;
-canvas.Height = canvasSize;
+canvas.height = canvasSize;
 const sectorAngle = 2 * Math.PI / sectors.length;
 
 // キャンバスサイズに合わせてポインタの位置を調整
