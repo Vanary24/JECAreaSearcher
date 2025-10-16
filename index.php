@@ -28,6 +28,8 @@ if (isset($_POST['fav_star'])) {
     //お気に入り削除の処理
 }
     $favorite = ['お店1', 'お店2', 'お店3', 'お店4', 'お店5'];
+
+
 ?>
 
 <!DOCTYPE html>

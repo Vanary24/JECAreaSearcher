@@ -8,7 +8,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 <head>
     <meta charset="UTF-8">
     <title>店舗追加</title>
-    <link rel="stylesheet" href="./bootstrap-5.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/">
     <script src="./bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./css/store_add.css">
     <script src="./js/store_add.js"></script>
@@ -66,14 +66,19 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                     </div>
                                 </div>
                                 <div>
-                                    <label for="img" class="form-label">画像</label>
-                                    <input type="file" id="img" name="image[]" multiple class="form-control">
+                                    <label class="filelabel my-3 bg-primary border border-primary">
+                                        <span class="" title="ファイルを選択">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="26" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+                                            </svg>
+                                            写真
+                                        </span>
+                                        <input type="file" id="filesend" name="image[]" multiple accept=".jpg,.png,image/jped,image/png">
+                                    </label>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </form>
@@ -82,6 +87,10 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     <?php } else {
         include "footer.php";
     } ?>
+
+    <script>
+        const 
+    </script>
 </body>
 
 </html>
