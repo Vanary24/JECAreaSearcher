@@ -4,10 +4,11 @@
     require_once './DAO/storeDAO.php';
 
     if (isset($_GET['keyword'])) {
-        $keyword = $_GET['keyword'];
+        $keyword = htmlspecialchars($_GET['keyword']);
 
         $search = new storeDAO();
         $store = $search->search_by_keyword($keyword);
+        $count = $search->search_count($keyword);
     }
 ?>
 
@@ -26,8 +27,9 @@
 
     <div class="container-fulid mx-4 my-2">
         <div class="text-end">
-            <p class="fw-bold fs-3">検索結果：<?= $store->count ?> 件</p>
+            <p class="fw-bold fs-3">検索結果：<?= $count ?> 件</p>
         </div>
+        <hr>
     </div>
 
     <?php } else {
