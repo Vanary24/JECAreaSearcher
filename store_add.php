@@ -1,5 +1,42 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (
+        isset($_POST['store_name']) && isset($_POST['store_address']) && isset($_POST['store_tel1']) && isset($_POST['store_tel2']) && isset($_POST['store_tel3'])
+        && isset($_POST['store_open']) && isset($_POST['store_close']) && isset($_POST['store_tag1']) && isset($_POST['store_tag2']) && isset($_POST['store_tag3'])
+    ) {
+        $store_name = $_POST['store_name'];
+        $store_address = $_POST['store_address'];
+        $store_tel = $_POST['store_tel1'] . '-' . $_POST['store_tel2'] . '-' . $_POST['store_tel3'];
+        $store_avgcost = $_POST['store_avgcost'];
+        $store_open = $_POST['store_open'];
+        $store_close = $_POST['store_close'];
+        $store_tag1 = $_POST['store_tag1'];
+        $store_tag2 = $_POST['store_tag2'];
+        $store_tag3 = $_POST['store_tag3'];
+        $store_image = [];
+
+        if (isset($_FILES['image']) && is_array($_FILES['image']['name'])) {
+            $totalFiles = count($_FILES['image']['name']);
+
+            for ($i = 0; $i < $totalFiles; $i++) {
+                $fileName = $_FILES['image']['name'][$i];
+                $fileTmpName = $_FILES['image']['tmp_name'][$i];
+                $fileError = $_FILES['image']['error'][$i];
+                array_push($store_image, $fileName);
+
+                if ($fileError === UPLOAD_ERR_OK) {
+                    $destination = 'images/upload/' . basename($fileName);
+                    move_uploaded_file($fileTmpName, $destination);
+                }
+            }
+        }
+
+        header("Location:" . $_SERVER['PHP_SELF']);
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,12 +88,17 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
                                 <div class="col-sm-6">
                                     <label for="range" class="form-label">平均予算</label>
-                                    <input type="text" name="store_range" id="range" class="form-control" placeholder="1000">
+                                    <input type="text" name="store_avgcost" id="range" class="form-control" placeholder="1000">
                                 </div>
 
-                                <div class="col-12">
-                                    <label for="open" class="form-label">営業時間</label>
-                                    <input type="text" name="store_open" id="open" class="form-control" placeholder="営業時間" required>
+                                <div class="col-6">
+                                    <label class="form-label">営業時間</label>
+                                    <input type="time" name="store_open" class="form-control" placeholder="営業時間" required>
+
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label">　　　　</label>
+                                    <input type="time" name="store_close" class="form-control" placeholder="営業時間" required>
                                 </div>
                                 <div class="tag position-relative" id="tagarea">
                                     <label for="tag" class="form-label">ハッシュタグ（最大３つまで）</label>
@@ -106,13 +148,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
                     reader.onload = function(e) {
                         const img = $('<img>').attr('src', e.target.result).attr('width', '250px').addClass('me-2 mb-2');
-                        const container = $('<div>').append(img);
-
-                        img.on('click', function() {
-                            $(this).parent().remove();
-                        });
-
-                        $('#preview').append(container);
+                        $('#preview').append(img);
                     }
 
                     reader.readAsDataURL(file);
