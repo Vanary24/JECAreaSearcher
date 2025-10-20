@@ -133,7 +133,6 @@ class StoreDAO
         string $store_tel,
         string $store_worktime,
         string $store_average_price,
-        int $hashtag_id,
         int $goukann
     ) {
 
