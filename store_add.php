@@ -78,7 +78,11 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                         <input type="file" id="filesend" name="image[]" multiple accept=".jpg,.png,image/jped,image/png">
                                     </label>
                                 </div>
-                                <div id="preview" class="col text-center"></div>
+                                <div id="preview"></div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
                             </div>
                         </div>
                     </div>
@@ -91,26 +95,27 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <script>
-        $(function() {
-            $('#filesend').change(function() {
-                if (!this.files.length) {
-                    return
-                }
-                $('#preview').text('');
+        $(document).ready(function() {
+            $('#filesend').on('change', function(event) {
+                $('#preview').empty();
 
-                var $files = $(this).prop('files');
-                var len = $files.length;
-                for (var i = 0; i < len; i++) {
-                    var file = $files[i];
-                    var fr = new FileReader();
+                const files = event.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
 
-                    fr.onload = function(e) {
-                        var src = e.target.result;
-                        var $img = '<img src ="' + src + '" width="250" height="250" class="me-2 mb-2">';
-                        $('#preview').append($img);
+                    reader.onload = function(e) {
+                        const img = $('<img>').attr('src', e.target.result).attr('width', '250px').addClass('me-2 mb-2');
+                        const container = $('<div>').append(img);
+
+                        img.on('click', function() {
+                            $(this).parent().remove();
+                        });
+
+                        $('#preview').append(container);
                     }
 
-                    fr.readAsDataURL(file);
+                    reader.readAsDataURL(file);
                 }
 
                 $('#preview').css('display', 'block');
