@@ -1,9 +1,4 @@
 <?php
 
-    require_once './DAO/favoriteDAO.php';
-
-    class rouletteDAO
-    {
-    
-    }
-?>
+       require_once './DAO.php';
+       
