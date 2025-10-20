@@ -54,7 +54,7 @@ class StoreDAO
         string $store_tel,
         string $store_worktime,
         string $store_average_price,
-        string $hashtag_id,
+        int $hashtag_id,
         int $goukann
     ) {
 
@@ -75,6 +75,6 @@ class StoreDAO
     }
 
     public function insert_image(){
-        
+
     }
 }

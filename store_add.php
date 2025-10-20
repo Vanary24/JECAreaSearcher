@@ -1,17 +1,18 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
+require_once './DAO/storeDAO.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
-        isset($_POST['store_name']) && isset($_POST['store_address']) && isset($_POST['store_tel1']) && isset($_POST['store_tel2']) && isset($_POST['store_tel3'])
+        isset($_POST['goukan']) && isset($_POST['store_name']) && isset($_POST['store_address']) && isset($_POST['store_tel1']) && isset($_POST['store_tel2']) && isset($_POST['store_tel3'])
         && isset($_POST['store_open']) && isset($_POST['store_close']) && isset($_POST['store_tag1']) && isset($_POST['store_tag2']) && isset($_POST['store_tag3'])
     ) {
+        $goukan = $_POST['goukan'];
         $store_name = $_POST['store_name'];
         $store_address = $_POST['store_address'];
         $store_tel = $_POST['store_tel1'] . '-' . $_POST['store_tel2'] . '-' . $_POST['store_tel3'];
         $store_avgcost = $_POST['store_avgcost'];
-        $store_open = $_POST['store_open'];
-        $store_close = $_POST['store_close'];
+        $store_worktime = $_POST['store_open'].'～'.$_POST['store_close'];
         $store_tag1 = $_POST['store_tag1'];
         $store_tag2 = $_POST['store_tag2'];
         $store_tag3 = $_POST['store_tag3'];
@@ -32,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
+
+        $store = new StoreDAO();
+        $store->store_insert($store_name,$store_address,$store_tel,$store_worktime,$store_avgcost,$store);
 
         header("Location:" . $_SERVER['PHP_SELF']);
         exit;
@@ -60,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container mt-3">
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="border border-info-subtle rounded-3 w-auto">
-                    <div class="d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center align-items-center position-relative">
                         <div class="m-2 w-75">
                             <div class="text-center">
                                 <h3 class="my-2">店舗追加</h3>
@@ -126,6 +130,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="text-center">
                                 <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
                             </div>
+                        </div>
+                        <div class="position-absolute top-0 start-0 w-auto m-2">
+                            <select name="goukan" class="form-control text-center">
+                                <option disabled selected value>号館</option>
+                                <option value="1">1号館</option>
+                                <option value="2">2号館</option>
+                                <option value="3">3号館</option>
+                                <option value="4">4号館</option>
+                                <option value="5">5号館</option>
+                                <option value="6">6号館</option>
+                                <option value="7">7号館</option>
+                                <option value="8">8号館</option>
+                                <option value="9">9号館</option>
+                                <option value="10">10号館</option>
+                                <option value="11">11号館</option>
+                                <option value="12">12号館</option>
+                            </select>
                         </div>
                     </div>
                 </div>

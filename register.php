@@ -5,7 +5,7 @@
 
     session_start();
 
-    $member_id = $_SESSION['member_id'];
+    $id = $_SESSION['id'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pw = $_POST['password'];
@@ -13,6 +13,8 @@
 
         if ($pw === '') {
             $errs[] = '新しいパスワードを入力してください';
+        } else if ($pw === $id) {
+            $errs[] = '学籍番号を入力しないでください';
         }
 
         if ($nickname === '') {
