@@ -8,10 +8,11 @@
         <a href="./" class="navbar-brand">
             <img src="./images/JECエリアサーチャー1.svg" alt="ロゴ" width="300">
         </a>
-        <form action="search_result.php" method="get" class="p-2 search-form" role="search">
+        <form action="./search_result.php" method="get" class="p-2 search-form" role="search">
             <label for="Search-input" id="search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
-            <input type="search" name="keyword" placeholder="検索" aria-labelledby="search-label" id="Search-input" class="me-2 search-input">
-            <button type="button" class="btn btn-outline-success">検索</button>
+            <input type="search" name="keyword" placeholder="検索" aria-labelledby="search-label" id="Search-input" class="me-2 search-input" 
+            <?php if (isset($keyword)) { ?>value="<?= $keyword ?>" <?php } ?>>
+            <button type="sumbit" class="btn btn-outline-success">検索</button>
         </form>
         <div>
             <ul class="my-auto navi">

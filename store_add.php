@@ -118,12 +118,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" name="store_avgcost" id="range" class="form-control" placeholder="1000">
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-label">営業時間</label>
                                     <input type="time" name="store_open" class="form-control" placeholder="営業時間" required>
 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-label">　　　　</label>
                                     <input type="time" name="store_close" class="form-control" placeholder="営業時間" required>
                                 </div>
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
                         <div class="position-absolute top-0 start-0 w-auto m-2">
-                            <select name="goukan" class="form-control text-center">
+                            <select name="goukan" class="form-control text-center" required>
                                 <option disabled selected value>号館</option>
                                 <option value="1">1号館</option>
                                 <option value="2">2号館</option>

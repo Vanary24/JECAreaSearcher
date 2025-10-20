@@ -14,12 +14,12 @@
         </a>
     </div>
     <div>
-        <a class="nav-link px-2 text-secondary" href="#" title="詳細検索">
+        <a class="nav-link px-2 text-secondary" href="./search_detail.php" title="詳細検索">
             <i class="fa-solid fa-magnifying-glass-plus fa-5x"></i>
         </a>
     </div>
     <div>
-        <a class="nav-link px-2 text-secondary" href="#" title="パスワード変更">
+        <a class="nav-link px-2 text-secondary" href="./password_reset.php" title="パスワード変更">
             <i class="fa-solid fa-key fa-5x"></i>
         </a>
     </div>
