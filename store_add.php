@@ -35,7 +35,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $store = new StoreDAO();
-        $store->store_insert($store_name,$store_address,$store_tel,$store_worktime,$store_avgcost,$store);
+        if(isset($store_tag1)){
+            $store_hashtag[] = $_POST['store_tag1'];
+        }
+        if(isset($store_tag2)){
+            $store_hashtag[] = $_POST['store_tag2'];
+        }
+        if(isset($store_tag3)){
+            $store_hashtag[] = $_POST['store_tag3'];
+        }
+        
+
+        foreach($store_hashtag as $store_hashtag);{
+            $store->hashtag_name_insert($store_hashtag);
+          $hashtag_id[] = $store->hashtag_id_search($store_hashtag);
+        }
+
+        foreach($hashtag_id as $hashtag_id){
+           
+            $store->hashtag_insert($store_id,$hashtag_id);
+        }
+
+
+
+        $store->store_insert($store_name,$store_address,$store_tel,$store_worktime,$store_avgcost,$goukann);
 
         header("Location:" . $_SERVER['PHP_SELF']);
         exit;

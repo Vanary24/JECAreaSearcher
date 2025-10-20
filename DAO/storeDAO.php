@@ -117,6 +117,22 @@ class StoreDAO
             $stmt->execute();
         }
     }
+     //ストアハッシュタグテーブルにstoreidとhashtagidを入れる
+    public function hashtag_insert($store_id,$hashtag_id){
+
+        $dbh = DAO::get_db_connect();
+       
+        $sql = "INSERT INTO store_hashtag
+                VALUES(:store_id,:hashtag_id)";
+        
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':store_id',$store_id,PDO::PARAM_INT);
+        $stmt->bindValue(':hashtag_id',$hashtag_id,PDO::PARAM_INT);
+        $stmt->execute();
+
+    }
+
+
 
 
 
@@ -126,14 +142,13 @@ class StoreDAO
         string $store_tel,
         string $store_worktime,
         string $store_average_price,
-        int $hashtag_id,
         int $goukann
     ) {
 
         $dbh = DAO::get_db_connect();
 
-        $sql = "INSERT INTO store(store_name ,store_address, store_tel, store_worktime, store_average_price, hashtag_id, store_image, goukann)
-                VALUES(:store_name,:store_address,:store_tel,:store_worktime,:store_average_price,:hashtag_id,:goukann)";
+        $sql = "INSERT INTO store(store_name ,store_address, store_tel, store_worktime, store_average_price, goukann)
+                VALUES(:store_name,:store_address,:store_tel,:store_worktime,:store_average_price,:goukann)";
 
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':store_name', $store_name, PDO::PARAM_STR);
@@ -141,10 +156,21 @@ class StoreDAO
         $stmt->bindValue(':store_tel', $store_tel, PDO::PARAM_STR);
         $stmt->bindValue(':store_worktime', $store_worktime, PDO::PARAM_STR);
         $stmt->bindValue(':store_average_price', $store_average_price, PDO::PARAM_INT);
-        $stmt->bindValue(':hashtag_id', $hashtag_id, PDO::PARAM_INT);
         $stmt->bindValue(':goukann', $goukann, PDO::PARAM_INT);
         $stmt->execute();
     }
+    
 
-    public function insert_image() {}
+    public function insert_image(string $store_id, string $store_image){
+        $dbh = DAO::get_db_connect();
+
+        $sql = "INSERT INTO store_image (store_id, store_image)
+                VALUES (:store_id, :store_image)";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindValue(':store_image', $store_image, PDO::PARAM_STR);
+        $stmt->execute();
+
+    }
 }
