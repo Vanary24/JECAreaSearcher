@@ -37,17 +37,13 @@ require_once './DAO/rouletteDAO.php';
 
                 </div>
             </form>
-            <div id="roulette">
-                <div id="pointer"></div>
-                <canvas id="canvas"></canvas>
-                <button onclick="spinRoulette()" id="spin">ルーレットを回します</button>
+            <div id="roulette" class="position-relative text-center">
+                <div id="pointer" class="position-absolute top-0 start-50 translate-middle"></div>
+                <canvas id="canvas" class="d-flex justify-content-center align-items-center position-relative"></canvas>
+                <button onclick="spinRoulette()" id="spin" class="position-absolute top-50 start-50 translate-middle">ルーレットを回します</button>
+                <p id="result" class="my-2 fw-bold fs-3"></p>
             </div>
-            <p id="result"></p>
-
-
-
-
-
+            
         </div>
 
 
@@ -69,8 +65,8 @@ require_once './DAO/rouletteDAO.php';
         const sectorAngle = 2 * Math.PI / sectors.length;
 
         // キャンバスサイズに合わせてポインタの位置を調整
-        pointer.style.top = `${-canvasSize * 0.1}px`; // キャンバスの上に表示
-        pointer.style.left = `calc(50% - ${canvasSize * 0.05}px)`; // 中央に配置
+        // pointer.style.top = `${-canvasSize * 0.030}px`; // キャンバスの上に表示
+        // pointer.style.left = `calc(50% - ${canvasSize * 0.05}px)`; // 中央に配置
 
         // ルーレットを描画
         function drawRoulette() {
@@ -85,7 +81,7 @@ require_once './DAO/rouletteDAO.php';
                 ctx.arc(0, 0, canvasSize / 2, index * sectorAngle, (index + 1) * sectorAngle);
                 ctx.fillStyle = color[index];
                 ctx.fill();
-                
+
 
                 //テキストを描く
                 ctx.save();
@@ -119,7 +115,7 @@ require_once './DAO/rouletteDAO.php';
                     // ルーレットの停止位置に基づいて結果を計算
                     const correctedAngle = (angle + Math.PI / 2) % (2 * Math.PI); // 矢印は上にあるため、90度補正
                     const sectorIndex = Math.floor(correctedAngle / sectorAngle) % sectors.length;
-                    document.getElementById('result').textContent = `結果: ${sectors[sectors.length - 1 - sectorIndex]}`;
+                    document.getElementById('result').textContent = `結果： ${sectors[sectors.length - 1 - sectorIndex]}`;
                     spinButton.disabled = false;
 
                 }

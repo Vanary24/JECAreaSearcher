@@ -119,17 +119,18 @@ button:hover {
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-top: 40px solid black;   /* 矢印を下向きに変更 */
-    position: absolute;
-    top: -40px; /* キャンバスの上に表示 */
-    left:calc(50% - 20px);  /* 中央に配置 */
+    z-index: 1;
 }
 #spin {
-    margin-top: 20px;
     padding: 10px 20px;
     background-color: #28a745;
     color: white;
     border: none;
     font-size: 16px;
     cursor: pointer;
+}
+
+#canvas {
+    margin: 0 auto;
 }
 
