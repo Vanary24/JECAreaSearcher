@@ -42,6 +42,7 @@ require_once './DAO/rouletteDAO.php';
                 <canvas id="canvas"></canvas>
                 <button onclick="spinRoulette()" id="spin">ルーレットを回します</button>
             </div>
+            <p id="result"></p>
 
 
 

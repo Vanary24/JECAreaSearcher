@@ -1,6 +1,6 @@
 <?php 
 
-    require_once './DAO/DAO.php';
+    require_once './DAO.php';
 
     class favoriteDAO
     {
@@ -39,6 +39,8 @@
                  return $stmt->fetchObject("store");
 
         }
+
+        
         
        
 

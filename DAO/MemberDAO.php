@@ -35,7 +35,7 @@
             $password = password_hash($member_password, PASSWORD_DEFAULT);
 
             $stmt->bindValue(':member_password', $password, PDO::PARAM_STR);
-            $stmt->bindValue(':niFckname', $nickname, PDO::PARAM_STR);
+            $stmt->bindValue(':nickname', $nickname, PDO::PARAM_STR);
             $stmt->bindValue(':member_id',$member_id,PDO::PARAM_STR);
             $stmt->execute();
         }
