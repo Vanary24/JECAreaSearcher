@@ -138,7 +138,6 @@ class StoreDAO
     }
     
 
-<<<<<<< HEAD
     public function insert_image(string $store_id, string $store_image){
         $dbh = DAO::get_db_connect();
 
@@ -151,7 +150,4 @@ class StoreDAO
         $stmt->execute();
 
     }
-=======
-    public function insert_image() {}
->>>>>>> 4c28bbe03bc773e0454cd134fd8fdaf4ec299fd8
 }
