@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         foreach($store_hashtag as $store_hashtag);{
             $store->hashtag_name_insert($store_hashtag);
-          $hashtag_id = $store->hashtag_id_search($store_hashtag);
+          $hashtag_id[] = $store->hashtag_id_search($store_hashtag);
         }
 
         foreach($hashtag_id as $hashtag_id){
