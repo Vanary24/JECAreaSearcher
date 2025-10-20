@@ -14,9 +14,8 @@
 <body>
     <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "header.php";
-    } else {
-        include "footer.php";
-    } ?>
+    }
+     ?>
     
 
 </body>
