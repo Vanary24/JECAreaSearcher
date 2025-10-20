@@ -1,9 +1,14 @@
  <?php
  
+    require_once 'DAO.php';
+
+
+
+ 
  class searchDAO{
 
     function get_hashtag_id(){
-
+        //ハッシュタグID取得
         $dbh = DAO::get_db_connect();
 
         $sql = "select sh.hashtag_id from store as s INNER JOIN store_hashtag as sh 
@@ -17,7 +22,7 @@
 
     function get_hashtag_name($hashtag_id){
         $dbh = DAO::get_db_connect();
-        
+        //ハッシュタグ名取得
          $hashtag_id = $this->get_hashtag_id();
 
         $sql = "select h.hashtag_name from hashtag as h INNER JOIN store_hashtag as sh 
@@ -32,7 +37,7 @@
 
     function search_by_keyword(string $keyword){
         $dbh = DAO::get_db_connect();
-
+        //キーワード検索
         $sql = "select * from store where store_name LIKE :keyword";
 
         $stmt = $dbh->prepare($sql);
@@ -42,6 +47,7 @@
     }
 
     function search_by_keyword_to_hashtag_name(string $keyword){
+        //ハッシュタグ検索
         $dbh = DAO::get_db_connect();
         $hashtag_id = $this->get_hashtag_id();
         $hashtag_name = $this->get_hashtag_name($hashtag_id);
