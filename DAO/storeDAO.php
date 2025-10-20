@@ -54,7 +54,7 @@ class StoreDAO
         string $store_tel,
         string $store_worktime,
         string $store_average_price,
-        int $hashtag_id,
+        string $hashtag_id,
         int $goukann
     ) {
 
@@ -73,8 +73,18 @@ class StoreDAO
         $stmt->bindValue(':goukann', $goukann, PDO::PARAM_INT);
         $stmt->execute();
     }
+    
 
-    public function insert_image(){
+    public function insert_image(string $store_id, string $store_image){
+        $dbh = DAO::get_db_connect();
+
+        $sql = "INSERT INTO store_image (store_id, store_image)
+                VALUES (:store_id, :store_image)";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':store_id', $store_id, PDO::PARAM_STR);
+        $stmt->bindValue(':store_image', $store_image, PDO::PARAM_STR);
+        $stmt->execute();
 
     }
 }

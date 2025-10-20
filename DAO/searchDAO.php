@@ -4,8 +4,13 @@
 
 
 
+
  
  class searchDAO{
+    public int $hashtag_id;
+    public string $hashtag_name;
+    public string $keyword;
+
 
     function get_hashtag_id(){
         //ハッシュタグID取得
