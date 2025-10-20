@@ -91,12 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="text" name="store_avgcost" id="range" class="form-control" placeholder="1000">
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-label">営業時間</label>
                                     <input type="time" name="store_open" class="form-control" placeholder="営業時間" required>
 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label class="form-label">　　　　</label>
                                     <input type="time" name="store_close" class="form-control" placeholder="営業時間" required>
                                 </div>
