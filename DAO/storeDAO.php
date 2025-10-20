@@ -125,22 +125,15 @@ class StoreDAO
 
 
 
-<<<<<<< HEAD
- 
-=======
 
 
->>>>>>> 532dd38f0df996fc86d67e39054af50f0884a1bf
     public function store_insert(
         string $store_name,
         string $store_address,
         string $store_tel,
         string $store_worktime,
         string $store_average_price,
-<<<<<<< HEAD
-=======
-        string $hashtag_id,
->>>>>>> 532dd38f0df996fc86d67e39054af50f0884a1bf
+        int $hashtag_id,
         int $goukann
     ) {
 
