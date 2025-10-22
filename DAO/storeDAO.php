@@ -52,11 +52,15 @@ class StoreDAO
     {
         $dbh = DAO::get_db_connect();
         //キーワード検索
-        $sql = "select * from store where store_name LIKE :keyword";
+        $sql = "select * from store as s inner join hashtag as h on s.hashtag_id = h.hashtag_id where store_name LIKE :keyword";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
         $stmt->execute();
-        $store = $stmt->fetchObject('store');
+        $store = [];
+        
+        while ($row = $stmt->fetchObject('store')) {
+            $store[] = $row;
+        }
 
         return $store;
     }
