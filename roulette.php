@@ -58,8 +58,8 @@ require_once './DAO/rouletteDAO.php';
 
 
         const pointer = document.getElementById('pointer');
-        const sectors = ["1", "2", "3"];
-        const color = ["#F00", "#00F", "#FF0"];
+        const sectors = ["ラーメン", "焼肉", "ピザ", "寿司", "カレー"];
+        const color = ["#F00", "#00F", "#FF0", "#00CC00", "#9933FF"];
         let angle = 0;
         let canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.8; // キャンバスのサイズを端末に合わせる
         canvas.width = canvasSize;
@@ -90,7 +90,7 @@ require_once './DAO/rouletteDAO.php';
                 ctx.rotate((index + 0.5) * sectorAngle);
                 ctx.textAlign = "right";
                 ctx.font = `${canvasSize * 0.05}px Arial`; // サイズに応じてフォントサイズ変更
-                ctx.fillStyle = "#FFF";
+                ctx.fillStyle = "#000";
                 ctx.fillText(sector, canvasSize * 0.45, 0); // テキストをキャンバスサイズに合わせて配置
                 ctx.restore();
             });
@@ -102,7 +102,7 @@ require_once './DAO/rouletteDAO.php';
             const spinButton = document.getElementById('spin');
             spinButton.disabled = true;
             const targetAngle = Math.random() * 2 * Math.PI + 10 * Math.PI; // ランダムな回転
-            const spinDuration = 3000; //3秒回転
+            const spinDuration = 5000; //3秒回転
             const startTime = performance.now();
 
             function animate(time) {
