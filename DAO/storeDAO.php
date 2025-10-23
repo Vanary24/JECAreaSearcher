@@ -16,6 +16,12 @@ class Store
     public int $count;
 }
 
+class Hashtag
+{
+    public int $hashtag_id;
+    public string $hashtag_name;
+}
+
 class StoreDAO
 {
     function get_hashtag_id()
@@ -90,8 +96,9 @@ class StoreDAO
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
         $stmt->execute();
+        $hashtag = $stmt->fetchObject('hashtag');
 
-        return $stmt->fetchObject('hashtag');
+        return $hashtag;
     }
 
     public function hashtag_name_insert(string $hashtag_name)
@@ -123,6 +130,35 @@ class StoreDAO
 
     }
 
+    public function image_insert($store_id,$image_name){
+        $dbh = DAO::get_db_connect();
+
+        $sql = "INSERT INTO store_image
+                VALUES(:store_id,:image_name)";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':store_id',$store_id,PDO::PARAM_INT);
+        $stmt->bindValue(':image_name',$image_name,PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+    public function get_store_name(int $store_id)
+        {
+                $dbh = DAO::get_db_connect();
+
+                //store-idをもとにstore_nameを取得する
+
+                $sql = "SELECT store_name FROM store where store_id = :store_id";
+
+                $stmt = $dbh->prepare($sql);
+                
+                $stmt->bindvalue(':store_id', $store_id, PDO::PARAM_STR);
+
+                $stmt->execute();
+
+                 return $stmt->fetchObject("store");
+
+        }
+
 
 
 
@@ -152,16 +188,5 @@ class StoreDAO
     }
     
 
-    public function insert_image(string $store_id, string $store_image){
-        $dbh = DAO::get_db_connect();
-
-        $sql = "INSERT INTO store_image (store_id, store_image)
-                VALUES (:store_id, :store_image)";
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':store_id', $store_id, PDO::PARAM_STR);
-        $stmt->bindValue(':store_image', $store_image, PDO::PARAM_STR);
-        $stmt->execute();
-
-    }
+    
 }

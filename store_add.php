@@ -46,19 +46,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
 
-        foreach($store_hashtag as $store_hashtag);{
-            $store->hashtag_name_insert($store_hashtag);
-          $hashtag_id[] = $store->hashtag_id_search($store_hashtag);
+        foreach($store_hashtag as $store_hashtag2);{
+            $store->hashtag_name_insert($store_hashtag2);
+            
+          $hashtag_id[] = $store->hashtag_id_search($store_hashtag2);
         }
 
-        foreach($hashtag_id as $hashtag_id){
+        foreach($hashtag_id as $hashtag_id2){
            
-            $store->hashtag_insert($store_id,$hashtag_id);
+            $store->hashtag_insert($store_id,$hashtag_id2);
         }
 
 
 
         $store->store_insert($store_name,$store_address,$store_tel,$store_worktime,$store_avgcost,$goukann);
+        
+        foreach($store_image as $store_image2){
+            $store->image_insert($store)
+
+        }
 
         header("Location:" . $_SERVER['PHP_SELF']);
         exit;
