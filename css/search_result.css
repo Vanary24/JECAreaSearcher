@@ -4,7 +4,7 @@ body {
 
 .star {
     border: none;
-    background-color: #fff;
+    background-color: transparent;
 }
 
 .star svg {
@@ -15,6 +15,15 @@ body {
     outline: none;
 }
 
+.star-fill {
+    border: none;
+    background-color: transparent;
+}
+
 .star-fill svg {
     color: rgb(245, 245, 50);
+}
+
+.star-fill:focus {
+    outline: none;
 }

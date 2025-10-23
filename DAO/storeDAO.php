@@ -11,6 +11,8 @@ class Store
     public int $store_average_price;
     public int $goukann;
     public int $count;
+    public int $hashtag_id;
+    public string $hashtag_name;
 }
 
 
@@ -36,7 +38,8 @@ class StoreDAO
     {
         $dbh = DAO::get_db_connect();
         //キーワード検索
-        $sql = "select * from store as s inner join hashtag as h on s.hashtag_id = h.hashtag_id where store_name LIKE :keyword";
+        $sql = "select * from store as s inner join store_hashtag as sh on s.store_id = sh.store_id
+                inner join hashtag as h on sh.hashtag_id = h.hashtag_id where store_name LIKE :keyword";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
         $stmt->execute();

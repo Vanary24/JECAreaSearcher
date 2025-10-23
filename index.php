@@ -10,6 +10,8 @@ if (isset($_POST['destory'])) {
 if (empty($_SESSION['member'])) {
     header('Location:login.php');
     exit;
+} else {
+    $member = $_SESSION['member'];
 }
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -46,7 +48,7 @@ if (isset($_POST['fav_star'])) {
 <body>
     <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "header.php";
-    ?>
+    } ?> 
     <div class="container-fulid mt-3">
         <div class="row mb-2 ms-1 me-1 position-relative">
             <div class="col-md-6">
@@ -133,7 +135,7 @@ if (isset($_POST['fav_star'])) {
         
         
     </div>
-    <?php } else {
+    <?php if (preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "footer.php";
     } ?>
 </body>

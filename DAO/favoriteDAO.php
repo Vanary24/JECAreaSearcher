@@ -1,36 +1,42 @@
-<?php 
+<?php
 
-    require_once 'DAO.php';
+require_once 'DAO.php';
 
-    class favoriteDAO
+class member_favorite
+{
+    public string $member_id;
+    public int $store_id;
+}
+class favoriteDAO
+{
+    public function get_store_id(string $member_id)
     {
-        public function get_store_id(int $member_id)
-        {
-             $dbh = DAO::get_db_connect();
+        $dbh = DAO::get_db_connect();
 
-             //学籍番号をもとにstore_idを取得する
+        //学籍番号をもとにstore_idを取得する
 
-             $sql = "SELECT store_id FROM member_favorite where member_id = :member_id";
+        $sql = "SELECT store_id FROM member_favorite where member_id = :member_id";
 
-             $stmt = $dbh->prepare($sql);
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindvalue(':member_id', $member_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $data = [];
 
-             $stmt->bindvalue(':member_id', $member_id, PDO::PARAM_STR);
-
-             $stmt->execute();
-
-             return $stmt->fetchObject("member_favorite");
-
+        while ($row = $stmt->fetchObject("member_favorite")) {
+            $data[] = $row;
         }
-
-        
-
-        
-        
-       
-
-
+        return $data;
     }
 
+    public function insert_favorite(string $member_id, int $store_id)
+    {
+        $dbh = DAO::get_db_connect();
 
+        $sql = "INSERT INTO member_favorite VALUES(:member_id, :store_id)";
 
-?>
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_STR);
+        $stmt->bindValue(':store_id', $member_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+}
