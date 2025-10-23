@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "header.php";
-    ?>
+    } ?>
         <div class="container-fulid mx-4 my-2">
             <div class="text-end">
                 <p class="fw-bold fs-3">検索結果：<?= $count ?> 件</p>
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php }
             } ?>
         </div>
-    <?php } else {
+    <?php if (preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "footer.php";
     } ?>
 </body>

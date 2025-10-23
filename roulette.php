@@ -19,7 +19,7 @@ require_once './DAO/rouletteDAO.php';
 <body>
     <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "header.php";
-    ?>
+    } ?> 
         <div class="container-fulid mt-3">
 
             <form>
@@ -49,7 +49,7 @@ require_once './DAO/rouletteDAO.php';
         </div>
 
 
-    <?php } else {
+    <?php if (preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "footer.php";
     } ?>
     <script>
