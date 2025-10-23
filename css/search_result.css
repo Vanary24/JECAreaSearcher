@@ -10,3 +10,7 @@ body {
 .star svg {
     color: gray;
 }
+
+.star:focus {
+    outline: none;
+}
