@@ -1,9 +1,12 @@
 <?php
 
-    class Hashtag
+    class hashtag
 {
     public int $hashtag_id;
     public string $hashtag_name;
+}
+
+class hashtagDAO{
 
     function get_hashtag_id()
     {

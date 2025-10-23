@@ -1,6 +1,8 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 require_once './DAO/storeDAO.php';
+require_once './DAO/hashtagDAO.php';
+require_once './DAO/imageDAO.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
@@ -35,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $store = new StoreDAO();
+        $hashtag = new hashtagDAO();
+        $image = new imageDAO();
+
         if(isset($store_tag1)){
             $store_hashtag[] = $_POST['store_tag1'];
         }
@@ -47,22 +52,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
 
         foreach($store_hashtag as $store_hashtag2);{
-            $store->hashtag_name_insert($store_hashtag2);
+            $hashtag->hashtag_name_insert($store_hashtag2);
             
-          $hashtag_id[] = $store->hashtag_id_search($store_hashtag2);
+          $hashtag_id[] = $hashtag->hashtag_id_search($store_hashtag2);
         }
-
-        foreach($hashtag_id as $hashtag_id2){
-           
-            $store->hashtag_insert($store_id,$hashtag_id2);
-        }
-
-
 
         $store->store_insert($store_name,$store_address,$store_tel,$store_worktime,$store_avgcost,$goukann);
+
+        $store_id = $store->get_store_id_by_store_address($store_address);
+
+        
+        foreach($hashtag_id as $hashtag_id2){
+           
+            $hashtag->hashtag_insert($store_id,$hashtag_id2);
+        }
         
         foreach($store_image as $store_image2){
-            $store->image_insert($store)
+            $image->image_insert($store_id,$store_image2);
 
         }
 

@@ -9,9 +9,6 @@ class Store
     public string $store_tel;
     public string $store_worktime;
     public int $store_average_price;
-    public string $hashtag_id;
-    public string $hashtag_name;
-    public string $store_image;
     public int $goukann;
     public int $count;
 }
@@ -61,22 +58,6 @@ class StoreDAO
         $count = $stmt->fetchColumn();
 
         return $count;
-    }
-
-    
-
-   
-     //ストアハッシュタグテーブルにstoreidとhashtagidを入れる
-   
-    public function image_insert($store_id,$image_name){
-        $dbh = DAO::get_db_connect();
-
-        $sql = "INSERT INTO store_image
-                VALUES(:store_id,:image_name)";
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':store_id',$store_id,PDO::PARAM_INT);
-        $stmt->bindValue(':image_name',$image_name,PDO::PARAM_STR);
-        $stmt->execute();
     }
 
     public function get_store_name(int $store_id)
