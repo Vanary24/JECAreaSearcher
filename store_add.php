@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label for="tag" class="form-label">ハッシュタグ（最大３つまで）</label>
                                     <div class="d-flex align-items-center">
                                         <input type="text" name="store_tag1" id="tag" class="form-control me-2" required>
-                                        <input type="text" name="store_tag2" class="form-control me-2">
+                                        <input type="text" name="store_tag2" id="tag2" class="form-control me-2">
                                         <input type="text" name="store_tag3" class="form-control">
                                     </div>
                                 </div>

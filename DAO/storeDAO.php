@@ -58,15 +58,28 @@ class StoreDAO
     {
         $dbh = DAO::get_db_connect();
         //キーワード検索
-        $sql = "select *, count(*) as count from store where store_name LIKE :keyword group by store_id, store_name, store_address, store_tel,
-                store_worktime, store_average_price, hashtag_id, goukann";
-
+        $sql = "select * from store as s inner join hashtag as h on s.hashtag_id = h.hashtag_id where store_name LIKE :keyword";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
         $stmt->execute();
-        $store = $stmt->fetchObject('store');
+        $store = [];
+        
+        while ($row = $stmt->fetchObject('store')) {
+            $store[] = $row;
+        }
 
         return $store;
+    }
+
+    function search_count(string $keyword) {
+        $dbh = DAO::get_db_connect();
+        $sql = "select count(store_name) as count from store where store_name LIKE :keyword";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+
+        return $count;
     }
 
     function search_by_keyword_to_hashtag_name(string $keyword)

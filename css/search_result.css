@@ -1,3 +1,20 @@
 body {
     padding-top: 100px;
 }
+
+.star {
+    border: none;
+    background-color: #fff;
+}
+
+.star svg {
+    color: gray;
+}
+
+.star:focus {
+    outline: none;
+}
+
+.star-fill svg {
+    color: rgb(245, 245, 50);
+}

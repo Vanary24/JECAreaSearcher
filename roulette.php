@@ -37,11 +37,13 @@ require_once './DAO/rouletteDAO.php';
 
                 </div>
             </form>
-            <div id="roulette" class="position-relative text-center">
+            <div id="roulette" class="position-relative">
                 <div id="pointer" class="position-absolute top-0 start-50 translate-middle"></div>
                 <canvas id="canvas" class="d-flex justify-content-center align-items-center position-relative"></canvas>
-                <button onclick="spinRoulette()" id="spin" class="position-absolute top-50 start-50 translate-middle">ルーレットを回します</button>
-                <p id="result" class="my-2 fw-bold fs-3"></p>
+                <button onclick="spinRoulette()" id="spin" class="position-absolute top-50 start-50 translate-middle">START</button>
+            </div>
+            <div class="text-center">
+                <p id="result" class="fw-bold fs-3"></p>
             </div>
             
         </div>
@@ -127,8 +129,8 @@ require_once './DAO/rouletteDAO.php';
             canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.8;
             canvas.width = canvasSize;
             canvas.height = canvasSize;
-            pointer.style.top = `${-canvasSize * 0.1}px`; // キャンバスの上に表示
-            pointer.style.left = `calc(50% - ${canvasSize * 0.05}px)`; // 中央に配置
+            //pointer.style.top = `${-canvasSize * 0.1}px`; // キャンバスの上に表示
+            //pointer.style.left = `calc(50% - ${canvasSize * 0.05}px)`; // 中央に配置
             drawRoulette(); // 再描画
         });
 
