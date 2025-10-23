@@ -14,3 +14,7 @@ body {
 .star:focus {
     outline: none;
 }
+
+.star-fill svg {
+    color: rgb(245, 245, 50);
+}

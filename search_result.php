@@ -75,11 +75,6 @@ if (isset($_GET['keyword'])) {
     } ?>
 
     <script>
-        $(function() {
-            $('.star svg').click(function() {
-                $(this).css('color', 'yellow');
-            })
-        })
     </script>
 </body>
 
