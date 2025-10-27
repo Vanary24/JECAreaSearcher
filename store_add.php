@@ -2,9 +2,7 @@
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 
-        header("Location:" . $_SERVER['PHP_SELF']);
-        exit;
-    
+
 
 ?>
 
