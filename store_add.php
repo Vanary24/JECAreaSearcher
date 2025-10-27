@@ -49,9 +49,9 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             <div class="col-md-6">
                                 <label for="tel" class="form-label">電話番号</label>
                                 <div class="d-flex align-items-center tel">
-                                    <input type="tel" name="store_tel1" id="tel" class="form-control" maxlength="2" pattern="[0-9]{2}" title="数字2桁" placeholder="XX" required>－
-                                    <input type="tel" name="store_tel2" class="form-control" maxlength="4" pattern="[0-9]{4}" title="数字4桁" placeholder="XXXX" required>－
-                                    <input type="tel" name="store_tel3" class="form-control" maxlength="4" pattern="[0-9]{4}" title="数字4桁" placeholder="XXXX" required>
+                                    <input type="tel" name="store_tel[]" id="tel" class="form-control" maxlength="2" pattern="[0-9]{2}" title="数字2桁" placeholder="XX" required>－
+                                    <input type="tel" name="store_tel[]" class="form-control" maxlength="4" pattern="[0-9]{4}" title="数字4桁" placeholder="XXXX" required>－
+                                    <input type="tel" name="store_tel[]" class="form-control" maxlength="4" pattern="[0-9]{4}" title="数字4桁" placeholder="XXXX" required>
                                 </div>
                             </div>
 
@@ -65,25 +65,24 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                 <input type="time" name="store_open" class="form-control" placeholder="営業時間" required>
 
                             </div>
-                            
+
                             <div class="col-6">
                                 <label class="form-label">　　　　</label>
                                 <input type="time" name="store_close" class="form-control" placeholder="営業時間" required>
                             </div>
 
-                            <div class="tag col position-relative" id="tagarea">
-                                <label for="tag" class="form-label">
+                            <div class="col">
+                                <label class="form-label">
                                     ハッシュタグ（最大３つまで）
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    <button type="button" class="tag-add" id="add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                         </svg>
-                                    </span>
+                                    </button>
                                 </label>
-                                <div class="d-flex align-items-center col-4">
-                                    <input type="text" name="store_tag1" id="tag" class="form-control me-2" required>
-
+                                <div class="d-flex align-items-center" id="tag">
+                                    <input type="text" name="store_tag[]" class="form-control me-2" required>
                                 </div>
                             </div>
                             <div>
@@ -153,6 +152,21 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                 $('#preview').css('display', 'block');
             });
         });
+
+        $(function() {
+            let count = 1;
+
+            $('#add').on('click', function() {
+                const input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control me-2');
+                $('#tag').append(input);
+                count++;
+                console.log(count);
+
+                if (count >= 3) {
+                    $('#add').css('display', 'none');
+                }
+            });
+        })
     </script>
 </body>
 
