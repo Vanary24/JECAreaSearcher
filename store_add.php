@@ -1,11 +1,5 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
-
-        header("Location:" . $_SERVER['PHP_SELF']);
-        exit;
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +11,9 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
     <script src="./helper/bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./css/store_add.css">
-    <script src="./js/store_add.js"></script>
+    <!-- <script src="./js/store_add.js"></script> -->
     <script src="./helper/jQuery/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.11.4/libphonenumber-js.min.js"></script>
 </head>
 
 <body>
@@ -27,7 +22,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <div class="container mt-3">
-        <form action="./admin.php" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="border border-info-subtle rounded-3 w-auto">
                 <div class="d-flex justify-content-center align-items-center position-relative">
                     <div class="m-2 w-75">
@@ -49,9 +44,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             <div class="col-md-6">
                                 <label for="tel" class="form-label">電話番号</label>
                                 <div class="d-flex align-items-center tel">
-                                    <input type="tel" name="store_tel[]" id="tel" class="form-control" maxlength="2" pattern="[0-9]{2}" title="数字2桁" placeholder="XX" required>－
-                                    <input type="tel" name="store_tel[]" class="form-control" maxlength="4" pattern="[0-9]{4}" title="数字4桁" placeholder="XXXX" required>－
-                                    <input type="tel" name="store_tel[]" class="form-control" maxlength="4" pattern="[0-9]{4}" title="数字4桁" placeholder="XXXX" required>
+                                    <input type="tel" name="store_tel" id="tel" class="form-control"  placeholder="XX-XXXX-XXXX" required>
                                 </div>
                             </div>
 
@@ -82,7 +75,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                     </button>
                                 </label>
                                 <div class="d-flex align-items-center" id="tag">
-                                    <input type="text" name="store_tag[]" class="form-control me-2" required>
+                                    <input type="text" name="store_tag[]" class="form-control mx-2" required>
                                 </div>
                             </div>
                             <div>
@@ -99,14 +92,13 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             </div>
                             <div id="preview"></div>
                         </div>
-                        
+
                         <div class="text-center">
                             <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
                         </div>
-                        </form>
                     </div>
                     <div class="position-absolute top-0 start-0 w-auto m-2">
-                        <select name="goukan" class="form-control text-center" required>
+                        <select name="buildingNo" class="form-control text-center" required>
                             <option disabled selected value>号館</option>
                             <option value="1">1号館</option>
                             <option value="2">2号館</option>
@@ -167,6 +159,16 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                 }
             });
         })
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const telInputs = document.querySelectorAll('input[type="tel"]');
+
+    telInputs.forEach(function(input) {
+        input.addEventListener('blur', function(event) {
+            event.target.value = new libphonenumber.AsYouType('JP').input(event.target.value);
+        });
+    });
+}, false);
     </script>
 </body>
 
