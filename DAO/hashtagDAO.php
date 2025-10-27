@@ -13,13 +13,12 @@ class hashtagDAO{
         //ハッシュタグID取得
         $dbh = DAO::get_db_connect();
 
-        $sql = "select sh.hashtag_id from store as s INNER JOIN store_hashtag as sh 
-                on s.store_id = sh.store_id";
+        $sql = "select hashtag_id from hashtag";
 
         $stmt = $dbh->prepare($sql);
 
         $stmt->execute();
-        return $stmt->fetch();
+        return  $stmt->fetch();
     }
 
     function get_hashtag_name($hashtag_id)
