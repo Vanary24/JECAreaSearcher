@@ -69,7 +69,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             <div class="col">
                                 <label class="form-label">
                                     ハッシュタグ（最大３つまで）
-                                    <button type="button" class="tag-add" id="add">
+                                    <button type="button" name = "tag" class="tag-add" id="add">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -248,6 +248,37 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     },
                 }
             });
+        });
+        const check = confilm('登録内容に間違いはありませんか？');
+        if (check == false) {
+            return false;
+        }
+
+        //formデータを取得
+        let formdata = new FormData($('form').get(0));
+        //文字データをappendして送る
+        formdata.append('store_name', $('#name').val());
+        formdata.append('store_address', $('#address').val());
+        formdata.append('store_tel', $('#tel').val());
+        formdata.append('store_avgcost', $('#range').val());
+        formdata.append('store_open', $('#open').val());
+        formdata.append('store_close', $('#close').val());
+        formdata.append('buildingNo', $('#buildingNo').val());
+        formdata.append('store_tags' ,$('#tag').val());
+        //Ajaxでデータのアップロード
+        $.ajax({
+            type: 'POST',
+            url: './admin.php',
+            data: formdata, //フォーム内のデータを持ってくる
+            catch: false,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                alert('店舗情報が正常に送信されました。');
+            },
+            error: function() {
+                alert('店舗情報の送信に失敗しました。');
+            }
         });
     </script>
 </body>
