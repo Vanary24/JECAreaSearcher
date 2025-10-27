@@ -25,13 +25,13 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                 <div class="d-flex justify-content-around align-items-center botton">
 
                     <div class="favorite mb-2">
-                        <button onclick="drawRoulette()" name="favorite">お気に入り</button>
+                        <button onclick="drawRoulette()" name="favorite" >お気に入り</button>
                     </div>
                     <div class="recommend mb-2">
                         <button onclick="drawRoulette()" name="recommend">おすすめ</button>
                     </div>
                     <div class="result mb-2">
-                        <button onclick="drawRoulette()" name="result">検索結果</button>
+                        <button onclick="drawRoulette()" name="result" >検索結果</button>
                     </div>
 
                 </div>

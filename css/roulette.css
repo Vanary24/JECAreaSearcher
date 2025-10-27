@@ -23,25 +23,92 @@ button{
     text-align: center;
     overflow-wrap: anywhere;
     background: transparent;
-    
 }
 
-.botton::after{
+.favorite {
+     
+    background-color: #CCFFCC;
+    color: black;
+    border-radius: 2rem;
+    font-size: 50px;  
+    display: inline-block;
+    text-decoration: none;
+    width: 250px;
+    height: 80px;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 5px green;
+    transition: .4s;
+}
+
+
+
+.recommend {
+    background-color: #CCFFCC;
+    color: black;
+    border-radius: 2rem;
+    font-size: 50px;  
+    display: inline-block;
+    text-decoration: none;
+    width: 250px;
+    height: 80px;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 5px green;
+    transition: .4s;
+}
+.result {
+    background-color: #CCFFCC;
+    color: black;
+    border-radius: 2rem;
+    font-size: 50px;  
+    display: inline-block;
+    text-decoration: none;
+    width: 250px;
+    height: 80px;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 5px green;
+    transition: .4s;
+}
+
+ .botton::after{
     position: absolute;
     justify-content: space-between;
     
 }
 
-.favorite::after{
+.favorite button:focus {
+    outline: none;
+}
+
+.recommend button:focus {
+    outline: none;
+}
+.result button:focus {
+    outline: none;
+}
+
+
+
+  /* .favorite::after{
     bottom: 0;
     left: 0;
     display: block;
     width: 100%;
     height: 2px;
     content: "";
-    background-color: #82a06c;
+    background-color: #339966;
     transform: scaleX(0);
     transform-origin: right top;
+    position: absolute;
+    justify-content: space-between;
 }
 
 .recommend::after{
@@ -54,6 +121,8 @@ button{
     background-color: #82a06c;
     transform: scaleX(0);
     transform-origin: right top;
+    position: absolute;
+    justify-content: space-between;
 }
 
 .result::after{
@@ -66,16 +135,37 @@ button{
     background-color: #82a06c;
     transform: scaleX(0);
     transform-origin: right top;
+    position: absolute;
+    justify-content: space-between; 
+} */ 
+.favorite:active {
+    -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  border-bottom: none;
+  background: #336633;
+  color: #FFF;
+}
+.recommend:active {
+    -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  border-bottom: none;
+  background: #336633;
+  color: #FFF;
+}
+.result:active{ 
+    -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  border-bottom: none;
+  background: #336633;
+  color: #FFF;
 }
 
 
 
-button:hover {
-    background-color: #ecfce1;
-    border-radius: 2rem;
-}
-
-@media (any-hover: hover){
+/* @media (any-hover: hover){
     .favorite::after{
         transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
     }
@@ -108,9 +198,7 @@ button:hover {
         transform-origin: left top;
         
     }
-    
-
-}
+} */
 
 #roulette {
     margin: 50px;
@@ -156,4 +244,5 @@ button:hover {
 #canvas {
     margin: 0 auto;
 }
+
 
