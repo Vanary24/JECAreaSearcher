@@ -11,13 +11,18 @@ body {
 }
 
 .tag-add {
+    color: rgb(0, 110, 255);
+    cursor: pointer;
     border: none;
     background-color: transparent;
-    color: rgb(132, 182, 247);
 }
 
 .tag-add:hover {
-    color: rgb(0, 110, 255);
+    color: rgb(132, 182, 247);
+}
+
+.tag-add:focus {
+    outline: none;
 }
 
 .filelabel {
