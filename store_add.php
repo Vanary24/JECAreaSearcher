@@ -44,7 +44,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             <div class="col-md-6">
                                 <label for="tel" class="form-label">電話番号</label>
                                 <div class="d-flex align-items-center tel">
-                                    <input type="tel" name="store_tel" id="tel" class="form-control"  placeholder="XX-XXXX-XXXX" required>
+                                    <input type="tel" name="store_tel" id="tel" class="form-control" placeholder="XX-XXXX-XXXX" required>
                                 </div>
                             </div>
 
@@ -161,14 +161,14 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
         })
 
         document.addEventListener('DOMContentLoaded', function() {
-    const telInputs = document.querySelectorAll('input[type="tel"]');
+            const telInputs = document.querySelectorAll('input[type="tel"]');
 
-    telInputs.forEach(function(input) {
-        input.addEventListener('blur', function(event) {
-            event.target.value = new libphonenumber.AsYouType('JP').input(event.target.value);
-        });
-    });
-}, false);
+            telInputs.forEach(function(input) {
+                input.addEventListener('blur', function(event) {
+                    event.target.value = new libphonenumber.AsYouType('JP').input(event.target.value);
+                });
+            });
+        }, false);
     </script>
 </body>
 
