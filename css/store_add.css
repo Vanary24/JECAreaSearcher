@@ -2,12 +2,13 @@ body {
     padding-top: 100px;
 }
 
-.tel input::placeholder {
+#tel::placeholder {
     text-align: center;
 }
 
-.tel input {
+#tel {
     text-align: center;
+    letter-spacing: 1px;
 }
 
 .tag-add {
@@ -46,4 +47,14 @@ body {
 
 #preview {
     display: none;
+}
+
+.Error {
+    color: red;
+    font-weight: bold;
+}
+
+.buildError {
+    top: 6px;
+    left: 80px;
 }
