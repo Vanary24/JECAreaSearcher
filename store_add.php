@@ -1,80 +1,11 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-require_once './DAO/storeDAO.php';
-require_once './DAO/hashtagDAO.php';
-require_once './DAO/imageDAO.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (
-        isset($_POST['goukan']) && isset($_POST['store_name']) && isset($_POST['store_address']) && isset($_POST['store_tel1']) && isset($_POST['store_tel2']) && isset($_POST['store_tel3'])
-        && isset($_POST['store_open']) && isset($_POST['store_close']) && isset($_POST['store_tag1']) && isset($_POST['store_tag2']) && isset($_POST['store_tag3'])
-    ) {
-        $goukan = $_POST['goukan'];
-        $store_name = $_POST['store_name'];
-        $store_address = $_POST['store_address'];
-        $store_tel = $_POST['store_tel1'] . '-' . $_POST['store_tel2'] . '-' . $_POST['store_tel3'];
-        $store_avgcost = $_POST['store_avgcost'];
-        $store_worktime = $_POST['store_open'] . '～' . $_POST['store_close'];
-        $store_tag1 = $_POST['store_tag1'];
-        $store_tag2 = $_POST['store_tag2'];
-        $store_tag3 = $_POST['store_tag3'];
-        $store_image = [];
-
-        if (isset($_FILES['image']) && is_array($_FILES['image']['name'])) {
-            $totalFiles = count($_FILES['image']['name']);
-
-            for ($i = 0; $i < $totalFiles; $i++) {
-                $fileName = $_FILES['image']['name'][$i];
-                $fileTmpName = $_FILES['image']['tmp_name'][$i];
-                $fileError = $_FILES['image']['error'][$i];
-                array_push($store_image, $fileName);
-
-                if ($fileError === UPLOAD_ERR_OK) {
-                    $destination = 'images/upload/' . basename($fileName);
-                    move_uploaded_file($fileTmpName, $destination);
-                }
-            }
-        }
-
-        $store = new StoreDAO();
-        $hashtag = new hashtagDAO();
-        $image = new imageDAO();
-
-        if (isset($store_tag1)) {
-            $store_hashtag[] = $_POST['store_tag1'];
-        }
-        if (isset($store_tag2)) {
-            $store_hashtag[] = $_POST['store_tag2'];
-        }
-        if (isset($store_tag3)) {
-            $store_hashtag[] = $_POST['store_tag3'];
-        }
-
-
-        foreach ($store_hashtag as $store_hashtag2); {
-            $hashtag->hashtag_name_insert($store_hashtag2);
-
-            $hashtag_id[] = $hashtag->hashtag_id_search($store_hashtag2);
-        }
-
-        $store->store_insert($store_name, $store_address, $store_tel, $store_worktime, $store_avgcost, $goukann);
-
-        $store_id = $store->get_store_id_by_store_address($store_address);
-
-
-        foreach ($hashtag_id as $hashtag_id2) {
-
-            $hashtag->hashtag_insert($store_id, $hashtag_id2);
-        }
-
-        foreach ($store_image as $store_image2) {
-            $image->image_insert($store_id, $store_image2);
-        }
 
         header("Location:" . $_SERVER['PHP_SELF']);
         exit;
-    }
-}
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } ?>
 
     <div class="container mt-3">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="./admin.php" method="post" enctype="multipart/form-data">
             <div class="border border-info-subtle rounded-3 w-auto">
                 <div class="d-flex justify-content-center align-items-center position-relative">
                     <div class="m-2 w-75">
@@ -169,10 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div id="preview"></div>
                         </div>
-
+                        
                         <div class="text-center">
                             <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
                         </div>
+                        </form>
                     </div>
                     <div class="position-absolute top-0 start-0 w-auto m-2">
                         <select name="goukan" class="form-control text-center" required>
