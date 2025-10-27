@@ -49,10 +49,7 @@
                 <h2>新規登録</h2>
             </div>
             <div class="form-floating mb-1">
-                <input type="password" name="password" id="pw" class="form-control" placeholder="新しいパスワード" 
-                <?php if (!empty($id)) { ?>
-                    value="<?= $id ?>"
-                <?php } ?> required>
+                <input type="password" name="password" id="pw" class="form-control" placeholder="新しいパスワード" required>
                 <label for="pw">新しいパスワード</label>
             </div>
             <div class="form-floating">
