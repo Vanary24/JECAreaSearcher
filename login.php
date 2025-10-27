@@ -12,6 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errs[] = '学籍番号を入力して下さい';
     }
 
+    
+
     if ($password === '') {
         $errs[] = 'パスワードを入力して下さい';
     }
