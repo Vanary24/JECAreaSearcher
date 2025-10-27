@@ -25,7 +25,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <div class="container mt-3">
-        <form action="./admin.php" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="border border-info-subtle rounded-3 w-auto">
                 <div class="d-flex justify-content-center align-items-center position-relative">
                     <div class="m-2 w-75">
@@ -101,7 +101,11 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                         <div class="text-center">
                             <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
                         </div>
-                        </form>
+                <?php
+                
+
+                ?>
+
                     </div>
                     <div class="position-absolute top-0 start-0 w-auto m-2">
                         <select name="goukan" class="form-control text-center" required>
