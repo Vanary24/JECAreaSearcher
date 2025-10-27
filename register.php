@@ -25,7 +25,7 @@
         if (empty($errs)) {
             $memberDAO = new MemberDAO();
             $memberDAO->member_update($pw, $nickname, $id);
-            $_SESSION['member'] = $memberDAO->get_member($member_id, $pw);
+            $_SESSION['member'] = $memberDAO->get_member($id, $pw);
 
             header('Location:index.php');
             exit;
