@@ -11,8 +11,8 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     <link rel="stylesheet" href="./helper/bootstrap-5.0.0-dist/css/bootstrap.min.css">
     <script src="./helper/bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./css/store_add.css">
-    <!-- <script src="./js/store_add.js"></script> -->
     <script src="./helper/jQuery/jquery-3.6.0.min.js"></script>
+    <script src="./helper/jQuery/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber-js/1.11.4/libphonenumber-js.min.js"></script>
 </head>
 
@@ -22,7 +22,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <div class="container mt-3">
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" id="form">
             <div class="border border-info-subtle rounded-3 w-auto">
                 <div class="d-flex justify-content-center align-items-center position-relative">
                     <div class="m-2 w-75">
@@ -33,19 +33,20 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                         <div class="row g-3">
                             <div class="col-12">
                                 <label for="name" class="form-label">店舗名</label>
-                                <input type="text" name="store_name" id="name" class="form-control" required autofocus>
+                                <input type="text" name="store_name" id="name" class="form-control" required autofocus data-error_placement="#nameError">
+                                <div id="nameError"></div>
                             </div>
 
                             <div class="col-12">
                                 <label for="address" class="form-label">住所</label>
-                                <input type="text" name="store_address" id="address" class="form-control" placeholder="東京都〇〇区〇－〇－〇・・・" required>
+                                <input type="text" name="store_address" id="address" class="form-control" placeholder="東京都〇〇区〇丁目〇－〇" required data-error_placement="addressError">
+                                <div id="addressError"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="tel" class="form-label">電話番号</label>
-                                <div class="d-flex align-items-center tel">
-                                    <input type="tel" name="store_tel" id="tel" class="form-control" placeholder="XX-XXXX-XXXX" required>
-                                </div>
+                                <input type="tel" name="store_tel" id="tel" class="form-control" pattern="0[1-9]{3}[0-9]{6}" maxlength="10" minlength="10" placeholder="0X-XXXX-XXXX" required data-error_placement="#telError">
+                                <div id="telError"></div>
                             </div>
 
                             <div class="col-sm-6">
@@ -55,19 +56,20 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
                             <div class="col-6">
                                 <label class="form-label">営業時間</label>
-                                <input type="time" name="store_open" class="form-control" placeholder="営業時間" required>
-
+                                <input type="time" name="store_open" class="form-control" placeholder="営業時間" required data-error_placement="#openError">
+                                <div id="openError"></div>
                             </div>
 
                             <div class="col-6">
                                 <label class="form-label">　　　　</label>
-                                <input type="time" name="store_close" class="form-control" placeholder="営業時間" required>
+                                <input type="time" name="store_close" class="form-control" placeholder="営業時間" required data-error_placement="#closeError">
+                                <div id="closeError"></div>
                             </div>
 
                             <div class="col">
                                 <label class="form-label">
                                     ハッシュタグ（最大３つまで）
-                                    <button type="button" class="tag-add" id="add">
+                                    <button type="button" name = "tag" class="tag-add" id="add">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -75,8 +77,9 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                     </button>
                                 </label>
                                 <div class="d-flex align-items-center" id="tag">
-                                    <input type="text" name="store_tag[]" class="form-control mx-2" required>
+                                    <input type="text" name="store_tag[]" class="form-control mx-2" required data-error_placement="#tagError">
                                 </div>
+                                <div id="tagError"></div>
                             </div>
                             <div>
                                 <label class="filelabel my-3 bg-primary border border-primary">
@@ -98,7 +101,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                         </div>
                     </div>
                     <div class="position-absolute top-0 start-0 w-auto m-2">
-                        <select name="buildingNo" class="form-control text-center" required>
+                        <select name="buildingNo" class="form-control text-center" required data-error_placement="#buildingNoError">
                             <option disabled selected value>号館</option>
                             <option value="1">1号館</option>
                             <option value="2">2号館</option>
@@ -114,6 +117,9 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             <option value="12">12号館</option>
                         </select>
                     </div>
+                    <div class="position-absolute w-auto m-2 buildError">
+                        <div id="buildingNoError"></div>
+                    </div>
                 </div>
             </div>
         </form>
@@ -124,6 +130,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
     } ?>
 
     <script>
+        // 画像のプレビュー処理
         $(document).ready(function() {
             $('#filesend').on('change', function(event) {
                 $('#preview').empty();
@@ -145,6 +152,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             });
         });
 
+        // タグの追加処理
         $(function() {
             let count = 1;
 
@@ -160,15 +168,118 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             });
         })
 
+        // 電話番号のハイフン処理
         document.addEventListener('DOMContentLoaded', function() {
             const telInputs = document.querySelectorAll('input[type="tel"]');
 
             telInputs.forEach(function(input) {
                 input.addEventListener('blur', function(event) {
                     event.target.value = new libphonenumber.AsYouType('JP').input(event.target.value);
+                    console.log(event.target.value);
+                });
+
+                input.addEventListener('focus', function(e) {
+                    const value = e.target.value;
+                    const newValue = value.replace(/-/g, '');
+
+                    e.target.value = newValue;
                 });
             });
         }, false);
+
+        // 入力フォームのバリデーションチェック
+        $(function() {
+            $('#form').validate({
+                errorClass: "Error",
+                errorElement: "span",
+                errorPlacement: function(error, element) {
+                    error.appendTo(element.data('error_placement'));
+                },
+                rules: {
+                    store_name: {
+                        required: true,
+                    },
+                    store_address: {
+                        required: true,
+                    },
+                    store_tel: {
+                        required: true,
+                        maxlength: 10,
+                        minlength: 10,
+                        pattern: /^0[0-9]+$/,
+                    },
+                    store_open: {
+                        required: true,
+                    },
+                    store_close: {
+                        required: true,
+                    },
+                    "store_tag[]": {
+                        required: true,
+                    },
+                    buildingNo: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    store_name: {
+                        required: '店舗名を入力してください',
+                    },
+                    store_address: {
+                        required: '住所を入力してください',
+                    },
+                    store_tel: {
+                        required: '電話番号を入力してください',
+                        maxlength: '10桁の電話番号を入力してください',
+                        minlength: '10桁の電話番号を入力してください',
+                        pattern: '0から始まる電話番号を入力してください',
+                    },
+                    store_open: {
+                        required: '開店時刻を入力してください',
+                    },
+                    store_close: {
+                        required: '閉店時刻を入力してください',
+                    },
+                    "store_tag[]": {
+                        required: 'タグを入力してください',
+                    },
+                    buildingNo: {
+                        required: '号館を選択してください',
+                    },
+                }
+            });
+        });
+        const check = confilm('登録内容に間違いはありませんか？');
+        if (check == false) {
+            return false;
+        }
+
+        //formデータを取得
+        let formdata = new FormData($('form').get(0));
+        //文字データをappendして送る
+        formdata.append('store_name', $('#name').val());
+        formdata.append('store_address', $('#address').val());
+        formdata.append('store_tel', $('#tel').val());
+        formdata.append('store_avgcost', $('#range').val());
+        formdata.append('store_open', $('#open').val());
+        formdata.append('store_close', $('#close').val());
+        formdata.append('buildingNo', $('#buildingNo').val());
+        formdata.append('store_tags' ,$('#tag').val());
+        //Ajaxでデータのアップロード
+        $.ajax({
+            type: 'POST',
+            url: './admin.php',
+            data: formdata, //フォーム内のデータを持ってくる
+            catch: false,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                alert('店舗情報が正常に送信されました。');
+            },
+            error: function() {
+                alert('店舗情報の送信に失敗しました。');
+            }
+        });
     </script>
 </body>
 
