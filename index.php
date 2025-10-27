@@ -53,7 +53,7 @@ if (isset($_POST['fav_star'])) {
         <div class="row mb-2 ms-1 me-1 position-relative">
             <div class="col-md-6">
                 <div class="text-center">
-                    <button class="btn btn-secondary dropdown-toggle mt-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn_h btn-success dropdown-toggle mt-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         号館を選択してください
                     </button>
                     <ul class="dropdown-menu buliding-select">
@@ -118,7 +118,7 @@ if (isset($_POST['fav_star'])) {
 
             <div class="position-absolute top-0 start-50 translate-middle-x mt-1 w-auto">
                 <form action="./store_add.php" method="post">
-                    <button type="submit" class="btn btn-secondary">
+                    <button type="submit" class="btn_h btn-success">
                         お店の追加
                     </button>
                 </form>
