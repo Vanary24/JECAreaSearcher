@@ -246,9 +246,11 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     buildingNo: {
                         required: '号館を選択してください',
                     },
-                }
+                },
             });
         });
+
+        
         const check = confilm('登録内容に間違いはありませんか？');
         if (check == false) {
             return false;
