@@ -83,7 +83,7 @@ if (isset($_POST['fav_star'])) {
                 <?php } ?>
             </div>
             <div class="col-md-6 mt-2">
-                <div class="text-center">
+                <div class="a text-center">
                     <h3>お気に入りのお店</h3>
                 </div>
                 
