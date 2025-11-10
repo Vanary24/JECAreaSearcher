@@ -1,3 +1,4 @@
+// 電話番号
 document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('.tel input');
     const tel_length = document.getElementById('tel').maxLength;
