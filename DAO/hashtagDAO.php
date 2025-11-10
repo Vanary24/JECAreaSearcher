@@ -1,6 +1,9 @@
 <?php
 
-    class hashtag
+    require_once 'DAO.php';
+
+    
+ class hashtag
 {
     public int $hashtag_id;
     public string $hashtag_name;
@@ -56,8 +59,8 @@ class hashtagDAO{
     }
 
     
-
-     public function hashtag_id_search(string $hashtag_name)
+    // ハッシュタグidを検索
+    public function hashtag_id_search(string $hashtag_name)
     {
         $dbh = DAO::get_db_connect();
 
@@ -69,7 +72,12 @@ class hashtagDAO{
         $stmt->execute();
         $hashtag = $stmt->fetchObject('hashtag');
 
-        return $hashtag;
+        if ($hashtag !== null) {
+            return $hashtag;
+        } else {
+            return false;
+        }
+        
     }
 
 
@@ -78,7 +86,7 @@ class hashtagDAO{
         $dbh = DAO::get_db_connect();
 
         //ハッシュタグテーブルに追加されるハッシュタグ名がないとき
-        if (!$this->hashtag_id_search($hashtag_name)) {
+        if ($this->hashtag_id_search($hashtag_name) === false) {
             $sql = "INSERT INTO hashtag
                 VALUES(':hashtag_name')";
 
