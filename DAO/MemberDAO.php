@@ -6,7 +6,7 @@ class Member
     public string $member_id;         // 学籍番号
     public string $member_password;         // パスワード
     public string $member_nickname;         // ニックネーム
-
+    public int $administer;
 }
 
 class MemberDAO
@@ -98,5 +98,24 @@ class MemberDAO
         $stmt->bindValue('member_id', $member_id, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function is_admin()
+    {
+
+        $dbh = DAO::get_db_connect();
+
+        $sql = "select member_id 
+                    from member
+                    where administer = 1";
+        $stmt = $dbh->prepare($sql);
+
+        $stmt->execute();
+        $data = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data;
     }
 }
