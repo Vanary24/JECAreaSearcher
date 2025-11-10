@@ -1,11 +1,8 @@
 <?php
-session_start();
+require_once 'DAO/MemberDAO.php';
+require_once 'DAO/favoriteDAO.php';
 
-if (isset($_POST['destory'])) {
-    session_destroy();
-    header('Location:login.php');
-    exit;
-}
+session_start();
 
 if (empty($_SESSION['member'])) {
     header('Location:login.php');
@@ -16,7 +13,9 @@ if (empty($_SESSION['member'])) {
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-
+$memberDAO = new MemberDAO();
+$admin = $memberDAO->is_admin();
+$admin_list = array_column($admin, 'member_id');
 
 if (isset($_GET['buildingNo'])) {
     $buildingNo = $_GET['buildingNo'];
@@ -30,8 +29,6 @@ if (isset($_POST['fav_star'])) {
     //お気に入り削除の処理
 }
     $favorite = ['お店1', 'お店2', 'お店3', 'お店4', 'お店5'];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -123,14 +120,15 @@ if (isset($_POST['fav_star'])) {
                     </button>
                 </form>
             </div>
-
+            <?php if (in_array($member->member_id, $admin_list)) { ?>
             <div class="position-absolute top-0 start-0 w-auto">
-                <form action="" method="post">
-                    <button type="submit" name="destory">
-                        ログアウト
+                <form action="./admin.php" method="post">
+                    <button type="submit" name="admin">
+                        管理者画面
                     </button>
                 </form>
             </div>
+            <?php } ?>
         </div>
         
         
