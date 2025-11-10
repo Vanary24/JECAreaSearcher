@@ -1,4 +1,5 @@
 <?php
+require_once 'DAO/adminDAO.php';
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (isset($_POST['store_avgcost'])) {
             $cost = $_POST['store_avgcost'];                            // 予算
+        } else {
+            $cost = "";
         }
 
         $store_image = [];                                              // 画像
@@ -37,10 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
         }
-        // var_dump($name, $address, $tel, $time, $buildingNo, $tags, $cost, $store_image);
+        
+        $admin = new AdminDAO();
+        $admin_image = new Admin_imageDAO();
+        $admin_hashtag = new Admin_hashtagDAO();
+        $admin->admin_insert($name, $address, $tel, $time, $cost, $buildingNo);
+        $result = $admin->get_admin_id($name);
+        $admin_id = (int)$result["admin_id"];
+        foreach ($store_image as $img) {
+            $admin_image->image_insert($admin_id, $img);
+        }
+        foreach ($tags as $tag) {
+            $admin_hashtag->hashtag_insert($admin_id, $tag);
+        }
 
         header("Location:" . $_SERVER['PHP_SELF']);
         exit;
+
     }
 }
 ?>
