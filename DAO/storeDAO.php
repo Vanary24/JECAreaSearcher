@@ -13,6 +13,7 @@ class Store
     public int $count;
     public int $hashtag_id;
     public string $hashtag_name;
+    public int $identity1;
 }
 
 

@@ -1,5 +1,10 @@
 <?php
+require_once 'DAO/adminDAO.php';
+
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+$adminDAO = new AdminDAO();
+$tmp_list = $adminDAO->get_tmp_data();
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,16 +21,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
         include "header.php";
     } ?>
     
-    <p>店舗名：<?$name?></p>
-    <p>住所：<?$address?></p>
-    <p>電話番号：<?$tel?></p>
-    <p>営業時間：<?$open?>〜<?$close?></p>
-    <p>平均価格：<?$avgcost?></p>
-    <p>号館：<?$buildingNo?></p>
-    <p>ハッシュタグ：<?$tags?></p>
-    <?foreach($store_image as $img){ ?>
-        <p>画像ファイル名：<?$img?></p>
-    <?}?>
+    
     <?php if (preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "footer.php";
     } ?>

@@ -4,12 +4,14 @@ require_once 'DAO/DAO.php';
 class Admin
 {
     public int $admin_id;
-    public string $tmp_store;
-    public string $tmp_address;
-    public string $tmp_tel;
-    public string $tmp_worktime;
-    public int $tmp_price;
+    public string $tmp_store_name;
+    public string $tmp_store_address;
+    public string $tmp_store_tel;
+    public string $tmp_store_worktime;
+    public int $tmp_store_average_price;
     public int $tmp_buildingNo;
+    public string $tmp_store_photo;
+    public string $tmp_hashtag_name;
 }
 
 class Admin_image
@@ -45,27 +47,32 @@ class AdminDAO
         $stmt->execute();
     }
 
-    public function get_admin_id(string $name){
-          $dbh = DAO::get_db_connect();
-
-          $sql = "SELECT admin_id FROM admin_store where tmp_store_name = :name";
-
-          $stmt = $dbh->prepare($sql);
-          $stmt->bindValue(':name',$name,PDO::PARAM_STR);
-          $stmt->execute();
-          $id = $stmt->fetch(PDO::FETCH_ASSOC);
-          return $id;
-    }
-
-    public function get_tmp_data() {
+    public function get_admin_id(string $name)
+    {
         $dbh = DAO::get_db_connect();
 
-        $sql = "SELECT * FROM admin_store";
+        $sql = "SELECT admin_id FROM admin_store where tmp_store_name = :name";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+        $id = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $id;
+    }
+
+    public function get_tmp_data()
+    {
+        $dbh = DAO::get_db_connect();
+
+        $sql = "SELECT s.admin_id, tmp_store_name, tmp_store_address, tmp_store_tel, tmp_store_worktime, 
+                tmp_store_average_price, tmp_hashtag_name, tmp_store_photo FROM admin_store AS s 
+                INNER JOIN admin_store_hashtag AS h ON s.admin_id = h.admin_id
+                INNER JOIN admin_store_image AS i ON s.admin_id = i.admin_id ";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $data = [];
 
-        while ($row = $stmt->fetchObject("admin_store")) {
+        while ($row = $stmt->fetchObject("Admin")) {
             $data[] = $row;
         }
 
