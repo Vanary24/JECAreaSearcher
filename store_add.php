@@ -1,5 +1,48 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (
+        isset($_POST['store_name']) && isset($_POST['store_address']) && isset($_POST['store_tel']) && isset($_POST['store_open']) &&
+        isset($_POST['store_close']) && isset($_POST['store_tag']) && isset($_POST['buildingNo'])
+    ) {
+        $name = $_POST['store_name'];                                   // 店舗名
+        $address = $_POST['store_address'];                             // 住所
+        $tel = $_POST['store_tel'];                                     // 電話番号
+        $time = $_POST['store_open'] . '～' . $_POST['store_close'];    // 営業時間
+        $buildingNo = $_POST['buildingNo'];                             // 号館
+        $tags = $_POST['store_tag'];                                    // タグ
+
+        if (isset($_POST['store_avgcost'])) {
+            $cost = $_POST['store_avgcost'];                            // 予算
+        }
+
+        $store_image = [];                                              // 画像
+        if (isset($_FILES['image']) && is_array($_FILES['image']['name'])) {
+            $totalFiles = count($_FILES['image']['name']);
+
+            for ($i = 0; $i < $totalFiles; $i++) {
+                $fileName = $_FILES['image']['name'][$i];
+                $fileTmpName = $_FILES['image']['tmp_name'][$i];
+                $fileError = $_FILES['image']['error'][$i];
+
+                // アップロードされた写真の名前を変更
+                $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+                $newName = uniqid() . '.' . $extension;
+                $newPath = 'images/upload/' . $newName;
+                array_push($store_image, $newName);
+
+                if ($fileError === UPLOAD_ERR_OK) {
+                    move_uploaded_file($fileTmpName, $newPath);
+                }
+            }
+        }
+        // var_dump($name, $address, $tel, $time, $buildingNo, $tags, $cost, $store_image);
+
+        header("Location:" . $_SERVER['PHP_SELF']);
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +82,13 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
                             <div class="col-12">
                                 <label for="address" class="form-label">住所</label>
-                                <input type="text" name="store_address" id="address" class="form-control" placeholder="東京都〇〇区〇丁目〇－〇" required data-error_placement="addressError">
+                                <input type="text" name="store_address" id="address" class="form-control" placeholder="東京都〇〇区〇丁目〇－〇" required data-error_placement="#addressError">
                                 <div id="addressError"></div>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="tel" class="form-label">電話番号</label>
-                                <input type="tel" name="store_tel" id="tel" class="form-control" pattern="0[1-9]{3}[0-9]{6}" maxlength="10" minlength="10" placeholder="0X-XXXX-XXXX" required data-error_placement="#telError">
+                                <input type="tel" name="store_tel" id="tel" class="form-control" pattern="0[1-9]{3}[0-9]{6}" maxlength="10" placeholder="0X-XXXX-XXXX" required data-error_placement="#telError">
                                 <div id="telError"></div>
                             </div>
 
@@ -69,7 +112,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                             <div class="col">
                                 <label class="form-label">
                                     ハッシュタグ（最大３つまで）
-                                    <button type="button" name = "tag" class="tag-add" id="add">
+                                    <button type="button" name="tag" class="tag-add" id="add">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -171,6 +214,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
         // 電話番号のハイフン処理
         document.addEventListener('DOMContentLoaded', function() {
             const telInputs = document.querySelectorAll('input[type="tel"]');
+            const tel = document.getElementById('tel')
 
             telInputs.forEach(function(input) {
                 input.addEventListener('blur', function(event) {
@@ -204,9 +248,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     },
                     store_tel: {
                         required: true,
-                        maxlength: 10,
-                        minlength: 10,
-                        pattern: /^0[0-9]+$/,
+                        maxlength: 12,
                     },
                     store_open: {
                         required: true,
@@ -230,9 +272,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     },
                     store_tel: {
                         required: '電話番号を入力してください',
-                        maxlength: '10桁の電話番号を入力してください',
-                        minlength: '10桁の電話番号を入力してください',
-                        pattern: '0から始まる電話番号を入力してください',
+                        maxlength: '10桁の電話番号を入力してください'
                     },
                     store_open: {
                         required: '開店時刻を入力してください',
@@ -248,39 +288,6 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     },
                 },
             });
-        });
-
-        
-        const check = confilm('登録内容に間違いはありませんか？');
-        if (check == false) {
-            return false;
-        }
-
-        //formデータを取得
-        let formdata = new FormData($('form').get(0));
-        //文字データをappendして送る
-        formdata.append('store_name', $('#name').val());
-        formdata.append('store_address', $('#address').val());
-        formdata.append('store_tel', $('#tel').val());
-        formdata.append('store_avgcost', $('#range').val());
-        formdata.append('store_open', $('#open').val());
-        formdata.append('store_close', $('#close').val());
-        formdata.append('buildingNo', $('#buildingNo').val());
-        formdata.append('store_tags' ,$('#tag').val());
-        //Ajaxでデータのアップロード
-        $.ajax({
-            type: 'POST',
-            url: './admin.php',
-            data: formdata, //フォーム内のデータを持ってくる
-            catch: false,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                alert('店舗情報が正常に送信されました。');
-            },
-            error: function() {
-                alert('店舗情報の送信に失敗しました。');
-            }
         });
     </script>
 </body>
