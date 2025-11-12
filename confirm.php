@@ -12,21 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $worktime = $_POST['worktime'];
         $price = $_POST['price'];
         $no = $_POST['no'];
-        $tags = [];
-        $imgs = [];
+
 
         $admin_imgDAO = new Admin_imageDAO();
         $admin_tagDAO = new Admin_hashtagDAO();
-        foreach ($admin_imgDAO->get_image($id) as $img) {
-            $imgs[] = (string)$img;
-        }
-
-        foreach ($admin_tagDAO->get_hashtag($id) as $tag) {
-            $tags[] = (string)$tag;
-        }
-
-        var_dump($imgs);
-        var_dump($tags);
+        $tmpimgs = $admin_imgDAO->get_image($id);
+        $tmptags = $admin_tagDAO->get_hashtag($id);
+        
+        
     }
 }
 ?>
