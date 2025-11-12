@@ -9,22 +9,19 @@ class Admin
     public string $tmp_store_tel;
     public string $tmp_store_worktime;
     public int $tmp_store_average_price;
-    public int $tmp_buildingNo;
+    public int $tmp_goukann;
     public string $tmp_store_photo;
     public string $tmp_hashtag_name;
 }
 
 class Admin_image
 {
-    public int $admin_id;
-    public string $photo;
+    public string $tmp_store_photo;
 }
 
 class Admin_hashtag
 {
-    public int $admin_id;
-    public string $hashtag;
-    public int $no;
+    public string $tmp_hashtag_name;
 }
 
 class AdminDAO
@@ -64,10 +61,7 @@ class AdminDAO
     {
         $dbh = DAO::get_db_connect();
 
-        $sql = "SELECT s.admin_id, tmp_store_name, tmp_store_address, tmp_store_tel, tmp_store_worktime, 
-                tmp_store_average_price, tmp_hashtag_name, tmp_store_photo FROM admin_store AS s 
-                INNER JOIN admin_store_hashtag AS h ON s.admin_id = h.admin_id
-                INNER JOIN admin_store_image AS i ON s.admin_id = i.admin_id ";
+        $sql = "SELECT * FROM admin_store";
         $stmt = $dbh->prepare($sql);
         $stmt->execute();
         $data = [];
@@ -95,6 +89,24 @@ class Admin_imageDAO
         $stmt->bindValue(':photo', $photo, PDO::PARAM_STR);
         $stmt->execute();
     }
+
+    public function get_image(int $id)
+    {
+        $dbh = DAO::get_db_connect();
+
+        $sql = "SELECT tmp_store_photo FROM admin_store_image WHERE admin_id = :id";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = [];
+
+        while ($row = $stmt->fetchObject("Admin_image")) {
+            $data[] = $row;
+        }
+
+        return $data;
+    }
 }
 
 class Admin_hashtagDAO
@@ -111,5 +123,23 @@ class Admin_hashtagDAO
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->bindValue(':tag', $tag, PDO::PARAM_STR);
         $stmt->execute();
+    }
+
+    public function get_hashtag(int $id)
+    {
+        $dbh = DAO::get_db_connect();
+
+        $sql = "SELECT tmp_hashtag_name FROM admin_store_hashtag WHERE admin_id = :id";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $data = [];
+
+        while ($row = $stmt->fetchObject("Admin_hashtag")) {
+            $data[] = $row;
+        }
+
+        return $data;
     }
 }
