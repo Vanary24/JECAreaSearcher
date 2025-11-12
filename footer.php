@@ -1,5 +1,6 @@
 <head>
     <script src="https://kit.fontawesome.com/a3491c9dc9.js" crossorigin="anonymous"></script>
+    <link rel="stylessheet" href="./css/footer.css"> 
 </head>
 
 <footer class="footer container-fluid d-flex flex-wrap justify-content-around align-items-center fixed-bottom" style="background-color: #ced4da;">
