@@ -1,0 +1,17 @@
+@media(min-width:1000px) {
+    body {
+    padding-top: 100px;
+}
+
+.tag-add {
+    border: none;
+    background-color: transparent;
+}
+
+.tag-add:focus{
+    outline: none;
+}
+}
+@media(max-width:1000px){
+    
+}

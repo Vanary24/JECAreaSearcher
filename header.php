@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li class="mb-2 mx-3 nav-item d-flex align-items-center">
-                    <a class="px-2 text-secondary dropdown-item" href="#" title="詳細検索">
+                    <a class="px-2 text-secondary dropdown-item" href="./search_detail.php" title="詳細検索">
                         <i class="fa-solid fa-magnifying-glass-plus fa-xl"></i>
                     </a>
                 </li>
