@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 console.log(count);
 
                 if (count >= 3) {
-                    $('#add').css('display', 'none');
+                    $('.tag-add').css('display', 'none');
                 }
             });
         })

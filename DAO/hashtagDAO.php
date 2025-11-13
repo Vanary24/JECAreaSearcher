@@ -1,15 +1,16 @@
 <?php
 
-    require_once 'DAO.php';
+require_once 'DAO.php';
 
-    
- class hashtag
+
+class hashtag
 {
     public int $hashtag_id;
     public string $hashtag_name;
 }
 
-class hashtagDAO{
+class hashtagDAO
+{
 
     function get_hashtag_id()
     {
@@ -24,20 +25,21 @@ class hashtagDAO{
         return  $stmt->fetch();
     }
 
-    function get_hashtag_name($hashtag_id)
+    // 検索結果用
+    public function get_hashtag_name(int $id)
     {
         $dbh = DAO::get_db_connect();
-        //ハッシュタグ名取得
-        $hashtag_id = $this->get_hashtag_id();
-
-        $sql = "select h.hashtag_name from hashtag as h INNER JOIN store_hashtag as sh 
-                on h.hashtag_id = sh.hashtag_id
-                where h.hashtag_id = :hashtag_id";
-
+        $sql = "SELECT hashtag_name FROM hashtag AS h INNER JOIN store_hashtag AS SH ON h.hashtag_id = sh.hashtag_id WHERE sh.store_id = :id";
         $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        $stmt->bindValue(':hashtag_id', $hashtag_id, PDO::PARAM_STR);
-        return $stmt->fetch();
+        $data = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
     }
 
     function search_by_keyword_to_hashtag_name(string $keyword)
@@ -57,7 +59,7 @@ class hashtagDAO{
         return $stmt->fetch();
     }
 
-    
+
     // ハッシュタグidを検索
     public function hashtag_id_search(string $hashtag_name)
     {
@@ -76,7 +78,31 @@ class hashtagDAO{
         } else {
             return false;
         }
-        
+    }
+
+    public function search_by_hashtag(string $t1, string $t2, string $t3, int $i)
+    {
+        $dbh = DAO::get_db_connect();
+        $sql = "SELECT store_name FROM hashtag AS h 
+                INNER JOIN store_hashtag AS sh ON h.hashtag_id = sh.hashtag_id 
+                INNER JOIN store AS s ON sh.store_id = s.store_id
+                WHERE hashtag_name LIKE :t1 OR hashtag_name LIKE :t2 OR hashtag_name LIKE :t3
+                GROUP BY store_name 
+                HAVING COUNT(store_name) >= :i";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':t1', '%'.$t1.'%', PDO::PARAM_STR);
+        $stmt->bindValue(':t2', '%'.$t1.'%', PDO::PARAM_STR);
+        $stmt->bindValue(':t3', '%'.$t1.'%', PDO::PARAM_STR);
+        $stmt->bindValue(':i', $i, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $data = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
     }
 
 
@@ -93,25 +119,19 @@ class hashtagDAO{
             $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
             $stmt->execute();
         }
-
-
     }
 
-     public function hashtag_insert($store_id,$hashtag_id){
+    public function hashtag_insert($store_id, $hashtag_id)
+    {
 
         $dbh = DAO::get_db_connect();
-       
+
         $sql = "INSERT INTO store_hashtag
                 VALUES(:store_id,:hashtag_id)";
-        
+
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':store_id',$store_id,PDO::PARAM_INT);
-        $stmt->bindValue(':hashtag_id',$hashtag_id,PDO::PARAM_INT);
+        $stmt->bindValue(':store_id', $store_id, PDO::PARAM_INT);
+        $stmt->bindValue(':hashtag_id', $hashtag_id, PDO::PARAM_INT);
         $stmt->execute();
-
     }
-
 }
-
-
-?>

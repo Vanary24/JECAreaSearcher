@@ -49,21 +49,6 @@ class StoreDAO
         return $count;
     }
 
-    public function get_hashtag_name(int $id) {
-        $dbh = DAO::get_db_connect();
-        $sql = "SELECT hashtag_name FROM hashtag AS h INNER JOIN store_hashtag AS SH ON h.hashtag_id = sh.hashtag_id WHERE sh.store_id = :id";
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $data = [];
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $data[] = $row;
-        }
-
-        return $data;
-    }
-
     public function store_insert(
         string $store_name,
         string $store_address,

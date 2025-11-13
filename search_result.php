@@ -2,6 +2,7 @@
 require_once './DAO/MemberDAO.php';
 require_once './DAO/storeDAO.php';
 require_once './DAO/favoriteDAO.php';
+require_once './DAO/hashtagDAO.php';
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -13,10 +14,16 @@ if (!empty($_SESSION['member'])) {
 
 if (isset($_GET['keyword'])) {
     $keyword = htmlspecialchars($_GET['keyword']);
+    $_SESSION['keyword'] = $keyword;
 
     $storeDAO = new storeDAO();
+    $hashtagDAO = new hashtagDAO();
     $stores = $storeDAO->search_by_keyword($keyword);
     $counts = $storeDAO->search_count($keyword);
+
+    if ($counts === null) {
+        $counts = 0;
+    }
 }
 
 $favorite = new favoriteDAO();
@@ -36,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['fav_star_fill'])) {
         $favorite->delete_favorite($member->member_id, $store_id);
     }
+    header("Location:" . $_SERVER['PHP_SELF']);
+    exit;
 }
 ?>
 
@@ -56,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } ?>
     <div class="container-fulid mx-4 my-2">
         <div class="text-end">
-            <p class="fw-bold fs-3">検索結果：<?= $counts ?> 件</p>
+            <p class="fw-bold fs-3">検索結果：<?= @$counts ?> 件</p>
         </div>
         <hr>
         <?php if (empty($stores)) { ?>
@@ -89,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="m-1 p-2">
                             <h3><?= $store->store_name ?></h3>
                             <p class="lead text-primary mt-3">＃
-                                <?php foreach ($storeDAO->get_hashtag_name($store->store_id) as $tag) { ?>
+                                <?php foreach ($hashtagDAO->get_hashtag_name($store->store_id) as $tag) { ?>
                                     <span><?= $tag["hashtag_name"] ?>　</span>
                                 <?php } ?>
                             </p>
