@@ -101,7 +101,7 @@ class Admin_imageDAO
         $stmt->execute();
         $data = [];
 
-        while ($row = $stmt->fetchObject("Admin_image")) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $data[] = $row;
         }
 
@@ -136,7 +136,7 @@ class Admin_hashtagDAO
         $stmt->execute();
         $data = [];
 
-        while ($row = $stmt->fetchObject("Admin_hashtag")) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $data[] = $row;
         }
 

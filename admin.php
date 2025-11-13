@@ -31,10 +31,11 @@ $tmp_list = $adminDAO->get_tmp_data();
             </div>
         </div>
         <hr>
-        <form action="./confirm.php" method="post">
-            <div class="row">
-                <div class="col-6">
-                    <?php foreach ($tmp_list as $tmp) { ?>
+
+        <div class="row">
+            <div class="col-6">
+                <?php foreach ($tmp_list as $tmp) { ?>
+                    <form action="./confirm.php" method="post">
                         <div class="mb-3">
                             <input type="hidden" name="id" value="<?= $tmp->admin_id ?>">
                             <input type="hidden" name="name" value="<?= $tmp->tmp_store_name ?>">
@@ -45,15 +46,17 @@ $tmp_list = $adminDAO->get_tmp_data();
                             <input type="hidden" name="no" value="<?= $tmp->tmp_goukann ?>">
                             <button type="submit" class="w-100"><?= $tmp->tmp_store_name ?></button>
                         </div>
-                    <?php } ?>
-                </div>
-
-                <div class="col-6">
-                    コメント1
-                </div>
+                    </form>
+                <?php } ?>
 
             </div>
-        </form>
+
+            <div class="col-6">
+                コメント1
+            </div>
+
+        </div>
+
     </div>
 
     <?php if (preg_match('/Mobile|Android|iPhone/', $user_agent)) {

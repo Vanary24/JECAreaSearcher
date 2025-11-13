@@ -22,7 +22,7 @@ class favoriteDAO
         $stmt->execute();
         $data = [];
 
-        while ($row = $stmt->fetchObject("member_favorite")) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $data[] = $row;
         }
         return $data;
@@ -36,7 +36,16 @@ class favoriteDAO
 
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':member_id', $member_id, PDO::PARAM_STR);
-        $stmt->bindValue(':store_id', $member_id, PDO::PARAM_INT);
+        $stmt->bindValue(':store_id', $store_id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function delete_favorite(string $member_id, int $store_id) {
+        $dbh = DAO::get_db_connect();
+        $sql = "DELETE FROM member_favorite WHERE member_id = :member_id AND store_id = :store_id";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':member_id', $member_id, PDO::PARAM_STR);
+        $stmt->bindValue(':store_id', $store_id, PDO::PARAM_STR);
         $stmt->execute();
     }
 }

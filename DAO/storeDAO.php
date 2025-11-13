@@ -20,27 +20,11 @@ class Store
 
 class StoreDAO
 {
-
-    function get_store_id_by_store_address(string $store_address)
-    {
-        $dbh = DAO::get_db_connect();
-
-        $sql = "select store_id from store where store_address = :store_address";
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':store_address', $store_address, PDO::PARAM_STR);
-        $stmt->execute();
-
-        return $stmt->fetch();
-    }
-
-
-    function search_by_keyword(string $keyword)
+    public function search_by_keyword(string $keyword)
     {
         $dbh = DAO::get_db_connect();
         //キーワード検索
-        $sql = "select * from store as s inner join store_hashtag as sh on s.store_id = sh.store_id
-                inner join hashtag as h on sh.hashtag_id = h.hashtag_id where store_name LIKE :keyword";
+        $sql = "SELECT * FROM store WHERE store_name LIKE :keyword";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
         $stmt->execute();
@@ -53,10 +37,10 @@ class StoreDAO
         return $store;
     }
 
-    function search_count(string $keyword)
+    public function search_count(string $keyword)
     {
         $dbh = DAO::get_db_connect();
-        $sql = "select count(store_name) as count from store where store_name LIKE :keyword";
+        $sql = "SELECT COUNT(store_name) AS count FROM store WHERE store_name LIKE :keyword";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
         $stmt->execute();
@@ -65,21 +49,19 @@ class StoreDAO
         return $count;
     }
 
-    public function get_store_name(int $store_id)
-    {
+    public function get_hashtag_name(int $id) {
         $dbh = DAO::get_db_connect();
-
-        //store-idをもとにstore_nameを取得する
-
-        $sql = "SELECT store_name FROM store where store_id = :store_id";
-
+        $sql = "SELECT hashtag_name FROM hashtag AS h INNER JOIN store_hashtag AS SH ON h.hashtag_id = sh.hashtag_id WHERE sh.store_id = :id";
         $stmt = $dbh->prepare($sql);
-
-        $stmt->bindvalue(':store_id', $store_id, PDO::PARAM_STR);
-
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
+        $data = [];
 
-        return $stmt->fetchObject("store");
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        return $data;
     }
 
     public function store_insert(
