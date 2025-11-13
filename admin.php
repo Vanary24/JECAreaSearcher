@@ -20,8 +20,45 @@ $tmp_list = $adminDAO->get_tmp_data();
     <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "header.php";
     } ?>
-    
-    
+
+    <div class="container mt-3">
+        <div class="d-flex justify-content-around align-items-center">
+            <div>
+                <h3>お店追加確認</h3>
+            </div>
+            <div>
+                <h3>コメント削除確認</h3>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+                <?php foreach ($tmp_list as $tmp) { ?>
+                    <form action="./confirm.php" method="post">
+                        <div class="mb-3">
+                            <input type="hidden" name="id" value="<?= $tmp->admin_id ?>">
+                            <input type="hidden" name="name" value="<?= $tmp->tmp_store_name ?>">
+                            <input type="hidden" name="address" value="<?= $tmp->tmp_store_address ?>">
+                            <input type="hidden" name="tel" value="<?= $tmp->tmp_store_tel ?>">
+                            <input type="hidden" name="worktime" value="<?= $tmp->tmp_store_worktime ?>">
+                            <input type="hidden" name="price" value="<?= $tmp->tmp_store_average_price ?>">
+                            <input type="hidden" name="no" value="<?= $tmp->tmp_goukann ?>">
+                            <button type="submit" class="w-100"><?= $tmp->tmp_store_name ?></button>
+                        </div>
+                    </form>
+                <?php } ?>
+
+            </div>
+
+            <div class="col-6">
+                コメント1
+            </div>
+
+        </div>
+
+    </div>
+
     <?php if (preg_match('/Mobile|Android|iPhone/', $user_agent)) {
         include "footer.php";
     } ?>
