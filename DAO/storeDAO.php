@@ -72,4 +72,16 @@ class StoreDAO
         $stmt->bindValue(':goukann', $goukann, PDO::PARAM_INT);
         $stmt->execute();
     }
+
+    public function get_store_id($address){
+        $dbh = DAO::get_db_connect();
+
+        $sql = "SELECT store_id FROM store
+                WHERE store_address = :address ";
+        
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':address',$address,PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }

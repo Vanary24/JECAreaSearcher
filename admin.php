@@ -35,7 +35,7 @@ $tmp_list = $adminDAO->get_tmp_data();
         <div class="row">
             <div class="col-6">
                 <?php foreach ($tmp_list as $tmp) { ?>
-                    <form action="./confirm.php" method="post">
+                    <form action="./confirm.php" method="get">
                         <div class="mb-3">
                             <input type="hidden" name="id" value="<?= $tmp->admin_id ?>">
                             <input type="hidden" name="name" value="<?= $tmp->tmp_store_name ?>">

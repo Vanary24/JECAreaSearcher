@@ -1,23 +1,53 @@
 <?php
 require_once 'DAO/adminDAO.php';
+require_once 'DAO/storeDAO.php';
+require_once 'DAO/hashtagDAO.php';
+require_once 'DAO/imageDAO.php';
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['address']) && isset($_POST['tel']) && isset($_POST['worktime']) && isset($_POST['price']) && isset($_POST['no'])) {
-        $id = $_POST['id'];
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $tel = $_POST['tel'];
-        $worktime = $_POST['worktime'];
-        $price = $_POST['price'];
-        $no = $_POST['no'];
+$admin_imgDAO = new Admin_imageDAO();
+$admin_tagDAO = new Admin_hashtagDAO();
+$storeDAO = new StoreDAO();
+$hashtagDAO = new hashtagDAO();
+$imageDAO = new imageDAO();
 
 
-        $admin_imgDAO = new Admin_imageDAO();
-        $admin_tagDAO = new Admin_hashtagDAO();
-        $tmpimgs = $admin_imgDAO->get_image($id);
-        $tmptags = $admin_tagDAO->get_hashtag($id);
+if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['address']) && isset($_GET['tel']) && isset($_GET['worktime']) && isset($_GET['price']) && isset($_GET['no'])) {
+    $id = $_GET['id'];
+    $name = $_GET['name'];
+    $address = $_GET['address'];
+    $tel = $_GET['tel'];
+    $worktime = $_GET['worktime'];
+    $price = $_GET['price'];
+    $no = $_GET['no'];
+
+
+    $tmpimgs = $admin_imgDAO->get_image($id);
+    $tmptags = $admin_tagDAO->get_hashtag($id);
+
+    $tags = [];
+    foreach ($tmptags as $tag) {
+        $tags[] = $tag["tmp_hashtag_name"];
+    }
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
+        if (isset($_POST["add"])) {
+            $storeDAO->store_insert($name, $address, $tel, $worktime, $price, $no);
+            $store_id = $storeDAO->get_store_id($address);
+            foreach ($tags as $tag) {
+                $hashtagDAO->hashtag_name_insert($tag);
+                $hashtag_id = $hashtagDAO->hashtag_id_search($tag);
+                $hashtagDAO->hashtag_insert($store_id, $hashtag_id);
+            }
+            foreach ($tmpimgs as $img) {
+                $imageDAO->image_insert($store_id, $img);
+            }
+
+            header('Location:admin.php');
+            exit;
+        }
     }
 }
 ?>
@@ -97,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <button type="submit" class="mt-4 btn btn-secondary w-100">戻る</button>
                         </form>
                         <form action="" method="post" class="col-6">
-                            <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
+                            <button type="submit" class="mt-4 btn btn-primary w-100" name="add">送信</button>
                         </form>
 
                     </div>
