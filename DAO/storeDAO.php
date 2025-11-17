@@ -20,13 +20,14 @@ class Store
 
 class StoreDAO
 {
-    public function search_by_keyword(string $keyword)
+    public function search_by_keyword(string $keyword, int $no)
     {
         $dbh = DAO::get_db_connect();
         //キーワード検索
-        $sql = "SELECT * FROM store WHERE store_name LIKE :keyword";
+        $sql = "SELECT * FROM store WHERE store_name LIKE :keyword AND goukann = :no";
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':no', $no, PDO::PARAM_INT);
         $stmt->execute();
         $store = [];
 
@@ -35,18 +36,6 @@ class StoreDAO
         }
 
         return $store;
-    }
-
-    public function search_count(string $keyword)
-    {
-        $dbh = DAO::get_db_connect();
-        $sql = "SELECT COUNT(store_name) AS count FROM store WHERE store_name LIKE :keyword";
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
-        $stmt->execute();
-        $count = $stmt->fetchColumn();
-
-        return $count;
     }
 
     public function store_insert(

@@ -9,28 +9,36 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 session_start();
 
 
- $storeDAO = new storeDAO();
- $hashtagDAO = new hashtagDAO();
+$storeDAO = new storeDAO();
+$hashtagDAO = new hashtagDAO();
 
 if (!empty($_SESSION['member'])) {
     $member = $_SESSION['member'];
 }
 
-if(isset($_GET['store_goukann'])){
+if (isset($_GET['store_goukann'])) {
     $goukan = $_GET['store_goukann'];
 }
 
 if (isset($_GET['keyword'])) {
     $keyword = htmlspecialchars($_GET['keyword']);
-    $stores = $storeDAO->search_by_keyword($keyword);
-    $counts = $storeDAO->search_count($keyword);
+    $stores = $storeDAO->search_by_keyword($keyword, $goukan);
 }
 
-if(!empty($_GET['store_tag'][0])){
+if (!empty($_GET['store_tag'][0])) {
     $store_tag = $_GET['store_tag'];
-    $stores = $hashtagDAO->search_by_hashtag($store_tag,$goukan,$keyword);   
+    $stores = $hashtagDAO->search_by_hashtag($store_tag, $goukan, $keyword);
 }
 
+if (!empty($stores)) {
+    $counts_list = [];
+    foreach ($stores as $s) {
+        $counts_list[] = $s["store_id"];
+    }
+    $counts = count(array_unique($counts_list));
+} else {
+    $counts = 0;
+}
 
 
 
@@ -90,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <hr>
         <?php if (empty($stores)) { ?>
-            <p>検索したお店はありません。</p>
+            <p class="fw-bold fs-2">検索したお店はありません。</p>
             <?php } else {
             foreach ($stores as $store) { ?>
                 <div class="row g-4 my-2 mx-5 py-2 justify-content-center">
@@ -131,10 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </span>
                                 <?= $store["store_address"] ?>
                             </p>
+                            <a href="./store_detail.php?store_id=<?= $store["store_id"] ?>" class="">→</a>
                         </div>
                     </div>
-
                 </div>
+                <hr>
         <?php }
         } ?>
     </div>
