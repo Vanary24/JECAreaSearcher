@@ -30,7 +30,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                     <div class="row g-3">
                         <div class="col-12">
                             <label for="keyword" class="form-label">キーワード入力</label>
-                            <input type="text" name="store_keyword" id="keyword" class="form-control" placeholder="お店の名前">
+                            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="お店の名前">
                         </div>
                         <div class="col-12">
                             <div class="row">
