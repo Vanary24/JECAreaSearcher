@@ -80,21 +80,39 @@ class hashtagDAO
         }
     }
 
-    public function search_by_hashtag(string $t1, string $t2, string $t3, int $i)
+    public function search_by_hashtag(array $tags)
     {
         $dbh = DAO::get_db_connect();
-        $sql = "SELECT store_name FROM hashtag AS h 
+
+        if (count($tags) == 3) {
+            $sql = "SELECT store_name FROM hashtag AS h 
                 INNER JOIN store_hashtag AS sh ON h.hashtag_id = sh.hashtag_id 
                 INNER JOIN store AS s ON sh.store_id = s.store_id
                 WHERE hashtag_name LIKE :t1 OR hashtag_name LIKE :t2 OR hashtag_name LIKE :t3
                 GROUP BY store_name 
                 HAVING COUNT(store_name) >= :i";
+        } elseif (count($tags) == 2) {
+            $sql = "SELECT store_name FROM hashtag AS h 
+                INNER JOIN store_hashtag AS sh ON h.hashtag_id = sh.hashtag_id 
+                INNER JOIN store AS s ON sh.store_id = s.store_id
+                WHERE hashtag_name LIKE :t1 OR hashtag_name LIKE :t2
+                GROUP BY store_name 
+                HAVING COUNT(store_name) >= :i";
+        } else {
+            $sql = "SELECT store_name FROM hashtag AS h 
+                INNER JOIN store_hashtag AS sh ON h.hashtag_id = sh.hashtag_id 
+                INNER JOIN store AS s ON sh.store_id = s.store_id
+                WHERE hashtag_name LIKE :t1
+                GROUP BY store_name 
+                HAVING COUNT(store_name) >= :i";
+        }
 
         $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':t1', '%'.$t1.'%', PDO::PARAM_STR);
-        $stmt->bindValue(':t2', '%'.$t1.'%', PDO::PARAM_STR);
-        $stmt->bindValue(':t3', '%'.$t1.'%', PDO::PARAM_STR);
-        $stmt->bindValue(':i', $i, PDO::PARAM_INT);
+
+        for ($i = 0; $i < count($tags); $i++) {
+            $stmt->bindValue(':t' . ($i + 1), '%' . $tags[$i] . '%', PDO::PARAM_STR);
+        }
+        $stmt->bindValue(':i', count($tags), PDO::PARAM_INT);
         $stmt->execute();
 
         $data = [];
