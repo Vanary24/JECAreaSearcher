@@ -5,6 +5,18 @@
     display: flex;
 }
 
+.build {
+    border: 1px solid #ced4da;
+    border-radius: 50%;
+    appearance: none;
+    text-align: center;
+    padding: .375rem .75rem;
+}
+
+.build:focus {
+    outline: none;
+}
+
 .search-input {
     outline: none;
     border: 0;

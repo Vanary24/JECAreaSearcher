@@ -133,7 +133,7 @@ if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['address']) && iss
                     </div>
                 </div>
                 <div class="position-absolute top-0 start-0 w-auto m-2">
-
+                    <p class="fs-4 ms-2 border p-2 rounded-circle border-danger border-3"><?= $no ?>号館</p>
                 </div>
 
             </div>

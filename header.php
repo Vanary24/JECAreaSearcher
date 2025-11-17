@@ -9,9 +9,26 @@
             <img src="./images/JECエリアサーチャー1.svg" alt="ロゴ" width="300">
         </a>
         <form action="./search_result.php" method="get" class="p-2 search-form" role="search">
+            <select class="me-2 build" name="store_goukann" id="no" required title="号館を選択してください">
+                <option value disabled selected></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <span></span>
             <label for="Search-input" id="search-label"><i class="fa-solid fa-magnifying-glass"></i></label>
-            <input type="search" name="keyword" placeholder="検索" aria-labelledby="search-label" id="Search-input" class="me-2 search-input" 
-            <?php if (isset($keyword)) { ?>value="<?= $keyword ?>" <?php } ?>>
+
+            <input type="search" name="keyword" placeholder="検索" aria-labelledby="search-label" id="Search-input" class="me-2 search-input"
+                <?php if (isset($keyword)) { ?>value="<?= $keyword ?>" <?php } ?>>
             <button type="sumbit" class="btn btn-outline-success">検索</button>
         </form>
         <div>
