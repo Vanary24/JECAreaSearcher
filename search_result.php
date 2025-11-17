@@ -20,11 +20,20 @@ if (isset($_GET['keyword'])) {
     $hashtagDAO = new hashtagDAO();
     $stores = $storeDAO->search_by_keyword($keyword);
     $counts = $storeDAO->search_count($keyword);
-
-    if ($counts === null) {
-        $counts = 0;
-    }
 }
+
+if(isset($_GET['store_tag'])){
+    $i = 0;
+    $store_tag = $_GET['store_tag'];
+}
+
+if(isset($_GET['store_goukann'])){
+    $goukan = $_GET['store_goukann'];
+    
+
+}
+
+
 
 // お気に入りのお店を取得
 $favorite = new favoriteDAO();
@@ -55,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $favo_list[] = $f["store_id"];
         }
     }
-
 }
+
+
 ?>
 
 <!DOCTYPE html>
