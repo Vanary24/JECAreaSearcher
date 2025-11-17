@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </button>
                                 </label>
                                 <div class="d-flex align-items-center" id="tag">
-                                    <input type="text" name="store_tag[]" class="form-control mx-2" required data-error_placement="#tagError">
+                                    <input type="text" name="store_tag[]" class="form-control" required data-error_placement="#tagError">
                                 </div>
                                 <div id="tagError"></div>
                             </div>
@@ -216,10 +216,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             let count = 1;
 
             $('#add').on('click', function() {
-                const input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control me-2');
+                let input;
+                if (count < 3) {
+                    input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control ms-2');
+                } else {
+                    input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control');
+                }
                 $('#tag').append(input);
                 count++;
-                console.log(count);
 
                 if (count >= 3) {
                     $('.tag-add').css('display', 'none');

@@ -44,11 +44,11 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                 </button>
                             </label>
                             <div class="d-flex align-items-center" id="tag">
-                                <input type="text" name="store_tag[]" class="form-control me-2">
+                                <input type="text" name="store_tag[]" class="form-control">
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="m-2">
+                            <div class="">
                                 <select name="store_goukann" class="form-control text-center">
                                     <option disabled selected value>号館を選択してください</option>
                                     <option value="1">1号館</option>
@@ -88,7 +88,13 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             let count = 1;
 
             $('#add').on('click', function() {
-                const input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control me-2');
+                let input;
+                if (count < 3) {
+                    input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control ms-2');
+                } else {
+                    input = $('<input>').attr('type', 'text').attr('name', 'store_tag[]').addClass('form-control');
+                }
+
                 $('#tag').append(input);
                 count++;
 

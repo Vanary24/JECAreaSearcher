@@ -26,6 +26,7 @@ if (isset($_GET['keyword'])) {
     }
 }
 
+// お気に入りのお店を取得
 $favorite = new favoriteDAO();
 $favo = $favorite->get_store_id($member->member_id);
 $favo_list = [];
@@ -33,18 +34,28 @@ foreach ($favo as $f) {
     $favo_list[] = $f["store_id"];
 }
 
+// お気に入りの追加と削除
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['store_id'])) {
         $store_id = $_POST['store_id'];
     }
     if (isset($_POST['fav_star'])) {
         $favorite->insert_favorite($member->member_id, $store_id);
+        $favo = $favorite->get_store_id($member->member_id);
+        $favo_list = [];
+        foreach ($favo as $f) {
+            $favo_list[] = $f["store_id"];
+        }
     }
     if (isset($_POST['fav_star_fill'])) {
         $favorite->delete_favorite($member->member_id, $store_id);
+        $favo = $favorite->get_store_id($member->member_id);
+        $favo_list = [];
+        foreach ($favo as $f) {
+            $favo_list[] = $f["store_id"];
+        }
     }
-    header("Location:" . $_SERVER['PHP_SELF']);
-    exit;
+
 }
 ?>
 
