@@ -28,7 +28,7 @@ if (isset($_GET['keyword'])) {
 
 if(!empty($_GET['store_tag'][0])){
     $store_tag = $_GET['store_tag'];
-    $stores = $hashtagDAO->search_by_hashtag($store_tag,$goukan,$keyword);
+    $stores = $hashtagDAO->search_by_hashtag($store_tag,$goukan,$keyword);   
 }
 
 

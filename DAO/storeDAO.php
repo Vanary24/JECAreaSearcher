@@ -30,7 +30,7 @@ class StoreDAO
         $stmt->execute();
         $store = [];
 
-        while ($row = $stmt->fetchObject('store')) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $store[] = $row;
         }
 
