@@ -21,7 +21,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
         <?php if (!preg_match('/Mobile|Android|iPhone/', $user_agent)) {
             include "header.php";
         } ?>
-        <form action="search_detail.php" method="get">
+        <form action="./search_result.php" method="get">
             <div class="container-fulid mt-3">
                 <div class="text-center">
                     <h3 class="my-2">詳細検索</h3>
