@@ -1,7 +1,5 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +49,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                                 <div class="col-6">
                                     <label class="form-label">号館</label>
                                     <div class="">
-                                        <select name="store_goukann" class="form-control text-center">
+                                        <select name="store_goukann" class="form-control text-center" required>
                                             <option disabled selected value>号館を選択してください</option>
                                             <option value="1">1号館</option>
                                             <option value="2">2号館</option>
@@ -73,7 +71,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="mt-4 btn btn-primary w-100">送信</button>
+                            <button type="submit" class="mt-4 btn btn-primary w-100">検索</button>
                         </div>
                     </div>
 
