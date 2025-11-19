@@ -127,7 +127,7 @@ class hashtagDAO
                 VALUES(':hashtag_name')";
 
             $stmt = $dbh->prepare($sql);
-            $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
+            $stmt->bindParam(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
             $stmt->execute();
     }
 
