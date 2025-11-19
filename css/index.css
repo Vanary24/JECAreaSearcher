@@ -7,13 +7,13 @@ body {
     letter-spacing: .25rem;
 }
 
-.star {
+.bm {
     border: none;
     background-color: #fff;
 }
 
-.star svg {
-    color: rgb(245, 245, 50);
+.bm svg {
+    color: rgb(255 215 60);
 }
 
 .btn_h {

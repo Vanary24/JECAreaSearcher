@@ -7,7 +7,6 @@ $storeDAO = new StoreDAO();
 
 if (isset($_GET['store_id'])) {
     $store_id = $_GET['store_id'];
-
 }
 ?>
 
@@ -31,26 +30,38 @@ if (isset($_GET['store_id'])) {
         <div class="row">
             <div class="col-sm-6">
                 <div class="card shadow-sm justify-content-center align-items-center">
-                    <img src="./images/house.svg" alt="画像" class="w-50">
+                    <img src="./images/shop.png" alt="画像" class="w-auto">
                     <p>スライドショー</p>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="m-1 p-2">
                     <h3>店舗名</h3>
-                    <p class="d-flex justify-content-between mt-3 fs-5">
+                    <p class="d-flex justify-content-between align-items-center mt-3 fs-5">
                         <span class="me-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                            </svg>
-                            住所
+                            住所：
                         </span>
 
-                        <a href="https://www.google.com/maps/search/?api=1&query=モス">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-map" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
-                            </svg>
+                        <a href="https://www.google.com/maps/search/?api=1&query=モス" class="map">
+                            <img src="./images/google map.svg" alt="map" width="50" height="50">
                         </a>
+                    </p>
+                    <p class="mt-3 fs-5">
+                        電話：
+                    </p>
+                    <p class="mt-3 fs-5">
+                        営業時間：
+                    </p>
+                    <p class="mt-3 fs-5">
+                        平均予算：
+                    </p>
+                </div>
+                <div class="mx-1 mt-5 p-2 text-primary">
+                    <h5 class="mb-2">
+                        ＃タグ：
+                    </h5>
+                    <p>
+                        タグ1　タグ2
                     </p>
                 </div>
             </div>

@@ -2,28 +2,28 @@ body {
     padding-top: 100px;
 }
 
-.star {
+.bm {
     border: none;
     background-color: transparent;
 }
 
-.star svg {
+.bm svg {
     color: gray;
 }
 
-.star:focus {
+.bm:focus {
     outline: none;
 }
 
-.star-fill {
+.bm-fill {
     border: none;
     background-color: transparent;
 }
 
-.star-fill svg {
-    color: rgb(245, 245, 50);
+.bm-fill svg {
+    color: rgb(255 215 60);
 }
 
-.star-fill:focus {
+.bm-fill:focus {
     outline: none;
 }
