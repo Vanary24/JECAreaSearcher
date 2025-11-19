@@ -59,7 +59,7 @@ class hashtagDAO
         return $stmt->fetch();
     }
 
-    public function search_by_hashtag(array $tags, int $gou,string $key)
+    public function search_by_hashtag(array $tags, int $gou, string $key)
     {
         $dbh = DAO::get_db_connect();
 
@@ -86,8 +86,8 @@ class hashtagDAO
             $stmt->bindValue(':t' . ($i + 1), '%' . $tags[$i] . '%', PDO::PARAM_STR);
         }
 
-        $stmt->bindValue(':gou',$gou,PDO::PARAM_INT);
-        $stmt->bindValue(':key','%' . $key . '%',PDO::PARAM_STR);
+        $stmt->bindValue(':gou', $gou, PDO::PARAM_INT);
+        $stmt->bindValue(':key', '%' . $key . '%', PDO::PARAM_STR);
         $stmt->execute();
 
         $data = [];
@@ -118,17 +118,20 @@ class hashtagDAO
         }
     }
 
-  //ハッシュタグテーブルに追加されるハッシュタグ名がないとき
+    //ハッシュタグテーブルに追加されるハッシュタグ名がないとき
     public function hashtag_name_insert(string $hashtag_name)
     {
         $dbh = DAO::get_db_connect();
 
+
+        if ($this->hashtag_id_search($hashtag_name) === false) {
             $sql = "INSERT INTO hashtag
-                VALUES(':hashtag_name')";
+                VALUES(:hashtag_name)";
 
             $stmt = $dbh->prepare($sql);
-            $stmt->bindParam(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
+            $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
             $stmt->execute();
+        }
     }
 
     public function hashtag_insert($store_id, $hashtag_id)
@@ -136,7 +139,7 @@ class hashtagDAO
 
         $dbh = DAO::get_db_connect();
 
-        $sql = "INSERT INTO store_hashtag
+        $sql = "INSERT INTO store_hashtag(store_id, hashtag_id)
                 VALUES(:store_id,:hashtag_id)";
 
         $stmt = $dbh->prepare($sql);
