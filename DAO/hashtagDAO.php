@@ -59,27 +59,6 @@ class hashtagDAO
         return $stmt->fetch();
     }
 
-
-    // ハッシュタグidを検索
-    public function hashtag_id_search(string $hashtag_name)
-    {
-        $dbh = DAO::get_db_connect();
-
-        $sql = "SELECT hashtag_id FROM hashtag
-                WHERE hashtag_name = :hashtag_name";
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
-        $stmt->execute();
-        $hashtag = $stmt->fetchObject('hashtag');
-
-        if ($hashtag !== null) {
-            return $hashtag;
-        } else {
-            return false;
-        }
-    }
-
     public function search_by_hashtag(array $tags, int $gou,string $key)
     {
         $dbh = DAO::get_db_connect();
@@ -119,20 +98,37 @@ class hashtagDAO
         return $data;
     }
 
+    // ハッシュタグidを検索
+    public function hashtag_id_search(string $hashtag_name)
+    {
+        $dbh = DAO::get_db_connect();
 
+        $sql = "SELECT hashtag_id FROM hashtag
+                WHERE hashtag_name = :hashtag_name";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
+        $stmt->execute();
+        $hashtag = $stmt->fetchObject('hashtag');
+
+        if ($hashtag !== null) {
+            return $hashtag;
+        } else {
+            return false;
+        }
+    }
+
+  //ハッシュタグテーブルに追加されるハッシュタグ名がないとき
     public function hashtag_name_insert(string $hashtag_name)
     {
         $dbh = DAO::get_db_connect();
 
-        //ハッシュタグテーブルに追加されるハッシュタグ名がないとき
-        if ($this->hashtag_id_search($hashtag_name) === false) {
             $sql = "INSERT INTO hashtag
                 VALUES(':hashtag_name')";
 
             $stmt = $dbh->prepare($sql);
-            $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
+            $stmt->bindParam(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
             $stmt->execute();
-        }
     }
 
     public function hashtag_insert($store_id, $hashtag_id)

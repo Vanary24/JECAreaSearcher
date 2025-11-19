@@ -37,8 +37,11 @@ if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['address']) && iss
             $storeDAO->store_insert($name, $address, $tel, $worktime, $price, $no);
             $store_id = $storeDAO->get_store_id($address);
             foreach ($tags as $tag) {
-                $hashtagDAO->hashtag_name_insert($tag);
                 $hashtag_id = $hashtagDAO->hashtag_id_search($tag);
+                if($hashtag_id === false) {
+                      $hashtagDAO->hashtag_name_insert($tag);
+                      $hashtag_id = $hashtagDAO->hashtag_id_search($tag);
+                }
                 $hashtagDAO->hashtag_insert($store_id, $hashtag_id);
             }
             foreach ($tmpimgs as $img) {
