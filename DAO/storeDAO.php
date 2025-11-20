@@ -71,6 +71,6 @@ class StoreDAO
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':address',$address,PDO::PARAM_STR);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["store_id"];
     }
 }

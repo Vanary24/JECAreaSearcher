@@ -34,21 +34,26 @@ $tmp_list = $adminDAO->get_tmp_data();
 
         <div class="row">
             <div class="col-6">
-                <?php foreach ($tmp_list as $tmp) { ?>
-                    <form action="./confirm.php" method="get">
-                        <div class="mb-3">
-                            <input type="hidden" name="id" value="<?= $tmp->admin_id ?>">
-                            <input type="hidden" name="name" value="<?= $tmp->tmp_store_name ?>">
-                            <input type="hidden" name="address" value="<?= $tmp->tmp_store_address ?>">
-                            <input type="hidden" name="tel" value="<?= $tmp->tmp_store_tel ?>">
-                            <input type="hidden" name="worktime" value="<?= $tmp->tmp_store_worktime ?>">
-                            <input type="hidden" name="price" value="<?= $tmp->tmp_store_average_price ?>">
-                            <input type="hidden" name="no" value="<?= $tmp->tmp_goukann ?>">
-                            <button type="submit" class="w-100"><?= $tmp->tmp_store_name ?></button>
-                        </div>
-                    </form>
+                <?php if (!empty($tmp_list)) {
+                    foreach ($tmp_list as $tmp) { ?>
+                        <form action="./confirm.php" method="get">
+                            <div class="mb-3">
+                                <input type="hidden" name="id" value="<?= $tmp->admin_id ?>">
+                                <input type="hidden" name="name" value="<?= $tmp->tmp_store_name ?>">
+                                <input type="hidden" name="address" value="<?= $tmp->tmp_store_address ?>">
+                                <input type="hidden" name="tel" value="<?= $tmp->tmp_store_tel ?>">
+                                <input type="hidden" name="worktime" value="<?= $tmp->tmp_store_worktime ?>">
+                                <input type="hidden" name="price" value="<?= $tmp->tmp_store_average_price ?>">
+                                <input type="hidden" name="no" value="<?= $tmp->tmp_goukann ?>">
+                                <button type="submit" class="w-100"><?= $tmp->tmp_store_name ?></button>
+                            </div>
+                        </form>
+                    <?php }
+                } else { ?>
+                    <div class="text-center">
+                        <p class="fw-bold">確認するお店はありません。</p>
+                    </div>
                 <?php } ?>
-
             </div>
 
             <div class="col-6">

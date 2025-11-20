@@ -72,6 +72,16 @@ class AdminDAO
 
         return $data;
     }
+    
+    public function delete_store(int $id) {
+        $dbh = DAO::get_db_connect();
+        
+        $sql = "DELETE FROM admin_store WHERE admin_id = :id";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
 
 class Admin_imageDAO
@@ -107,6 +117,16 @@ class Admin_imageDAO
 
         return $data;
     }
+
+    public function delete_store_image(int $id) {
+        $dbh = DAO::get_db_connect();
+        
+        $sql = "DELETE FROM admin_store_image WHERE admin_id = :id";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
 
 class Admin_hashtagDAO
@@ -141,5 +161,15 @@ class Admin_hashtagDAO
         }
 
         return $data;
+    }
+
+    public function delete_store_hashtag(int $id) {
+        $dbh = DAO::get_db_connect();
+        
+        $sql = "DELETE FROM admin_store_hashtag WHERE admin_id = :id";
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

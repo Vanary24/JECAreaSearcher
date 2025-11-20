@@ -109,7 +109,7 @@ class hashtagDAO
         $stmt = $dbh->prepare($sql);
         $stmt->bindValue(':hashtag_name', $hashtag_name, PDO::PARAM_STR);
         $stmt->execute();
-        $hashtag = $stmt->fetchObject('hashtag');
+        $hashtag = $stmt->fetch(PDO::FETCH_ASSOC)["hashtag_id"];
 
         if ($hashtag !== null) {
             return $hashtag;

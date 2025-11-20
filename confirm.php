@@ -10,6 +10,7 @@ $admin_tagDAO = new Admin_hashtagDAO();
 $storeDAO = new StoreDAO();
 $hashtagDAO = new hashtagDAO();
 $imageDAO = new imageDAO();
+$adminDAO = new AdminDAO();
 
 
 if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['address']) && isset($_GET['tel']) && isset($_GET['worktime']) && isset($_GET['price']) && isset($_GET['no'])) {
@@ -29,7 +30,12 @@ if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['address']) && iss
     foreach ($tmptags as $tag) {
         $tags[] = $tag["tmp_hashtag_name"];
     }
-    
+
+    $imgs = [];
+    foreach ($tmpimgs as $img) {
+        $imgs[] = $img["tmp_store_photo"];
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
@@ -38,16 +44,19 @@ if (isset($_GET['id']) && isset($_GET['name']) && isset($_GET['address']) && iss
             $store_id = $storeDAO->get_store_id($address);
             foreach ($tags as $tag) {
                 $hashtag_id = $hashtagDAO->hashtag_id_search($tag);
-                if($hashtag_id === false) {
-                      $hashtagDAO->hashtag_name_insert($tag);
-                      $hashtag_id = $hashtagDAO->hashtag_id_search($tag);
+                if ($hashtag_id === false) {
+                    $hashtagDAO->hashtag_name_insert($tag);
+                    $hashtag_id = $hashtagDAO->hashtag_id_search($tag);
                 }
                 $hashtagDAO->hashtag_insert($store_id, $hashtag_id);
             }
-            foreach ($tmpimgs as $img) {
+            foreach ($imgs as $img) {
                 $imageDAO->image_insert($store_id, $img);
             }
-
+            $admin_imgDAO->delete_store_image($id);
+            $admin_tagDAO->delete_store_hashtag($id);
+            $adminDAO->delete_store($id);
+            
             header('Location:admin.php');
             exit;
         }
