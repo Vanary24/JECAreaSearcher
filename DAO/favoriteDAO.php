@@ -48,4 +48,6 @@ class favoriteDAO
         $stmt->bindValue(':store_id', $store_id, PDO::PARAM_STR);
         $stmt->execute();
     }
+
+
 }

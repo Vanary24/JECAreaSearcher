@@ -1,6 +1,9 @@
 <?php
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
+require_once 'DAO/storeDAO.php';
+$storeDAO = new StoreDAO();
+//var_dump(a[] = $storeDAO->get_recommend($goukan))
 ?>
 
 <!DOCTYPE html>
@@ -57,8 +60,36 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 
         const pointer = document.getElementById('pointer');
-        const sectors = ["ラーメン", "焼肉", "ピザ", "寿司", "カレー"];
+
+        const sectors = [];
+        if(isset($_POST["favorite"])){
+
+        }
+        if(isset($_POST["recommend"])){
+            for($)
+        }
+        if(isset($_POST["result"])){
+            
+        }
+       
+        
         const color = ["#F00", "#00F", "#FF0", "#00CC00", "#9933FF"];
+        //ランダムに色を配列に追加
+        function random(){
+        let element = document.getElementById('id1');
+        let x;
+        let c;
+        const y = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+        
+        if(y.length <= 6){
+            x = y.toString().padStart(6,'0');
+        }
+             
+            
+            c = element.style.color = '#'+ x;
+
+            c = color.push;
+        }
         let angle = 0;
         let canvasSize = Math.min(window.innerWidth, window.innerHeight) * 0.8; // キャンバスのサイズを端末に合わせる
         canvas.width = canvasSize;
@@ -101,7 +132,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             const spinButton = document.getElementById('spin');
             spinButton.disabled = true;
             const targetAngle = Math.random() * 2 * Math.PI + 10 * Math.PI; // ランダムな回転
-            const spinDuration = 5000; //3秒回転
+            const spinDuration = 5000; //5秒回転
             const startTime = performance.now();
 
             function animate(time) {
