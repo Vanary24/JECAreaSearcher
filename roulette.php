@@ -101,7 +101,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
             const spinButton = document.getElementById('spin');
             spinButton.disabled = true;
             const targetAngle = Math.random() * 2 * Math.PI + 10 * Math.PI; // ランダムな回転
-            const spinDuration = 5000; //3秒回転
+            const spinDuration = 5000; //5秒回転
             const startTime = performance.now();
 
             function animate(time) {
