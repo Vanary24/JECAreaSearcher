@@ -73,4 +73,17 @@ class StoreDAO
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)["store_id"];
     }
+
+    //(仮)
+    public function get_recommend(int $goukan){
+        $dbh = DAO::get_db_connect();
+
+        $sql = "SELECT store_name FROM store
+                WHERE goukan = :goukan " ;
+        
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':goukan',$goukan,PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)["store_name"];
+    }
 }
