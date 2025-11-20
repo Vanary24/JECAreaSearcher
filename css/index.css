@@ -31,8 +31,26 @@ body {
     font-size: 20px;
     width: 250px;
     height: 40px;
-
+    
 }
+
+/* .btn_ht {
+    background-color: #99CC99;
+    color: black;
+    border-radius: 2rem;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 5px #669966;
+    transition: .4s;
+    font-size: 20px;
+    width: 250px;
+    height: 40px;
+    
+} */
 
 .btn_h:active{
     -webkit-transform: translateY(2px);
@@ -42,6 +60,15 @@ body {
   background: #009933;
   color: #000;
 }
+
+/* .btn_ht:active{
+       -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  border-bottom: none;
+  background: #009933;
+  color: #000; 
+} */
 
  .ab{
     background-color: #99CC99;
